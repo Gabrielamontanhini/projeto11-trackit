@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import Cabesalho from "../Cabesalho";
+import Rodape from "../Rodape";
 import CorpoHabitos from "./CorpoHabitos";
 
 export default function Habitos(){
@@ -40,6 +41,9 @@ function habitar(){
             </Comandos>
         </ConfigHabito>
         <CorpoHabitos habito={habitos}/>
+
+
+<Rodape/>
         </ContainerHabitos>
         </>
     )

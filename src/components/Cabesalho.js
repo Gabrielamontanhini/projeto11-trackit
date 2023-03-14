@@ -23,6 +23,7 @@ h1{
     font-weight: 400;
 font-size: 38.982px;
 margin-left: 18px;
+color: #FFFFFF;
 }
 img{
     width: 51px;

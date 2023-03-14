@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../assets/logo-completa.svg"
+import logo from "../../assets/logo-completa.svg"
+
+
+
 
 export default function TelaInicial(){
 
@@ -38,7 +42,8 @@ if (cadastro === false){
         <form>
         <input type="email" placeholder="email"></input>
         <input type="password" placeholder="senha"></input>
-<button>Entrar</button>  
+
+   <Link to="/hoje"> <button>Entrar</button>  </Link>
 <p onClick={cadastrar}>Não tem uma conta? Cadastre-se!</p>      
         </form>
         </ContainerInicial>

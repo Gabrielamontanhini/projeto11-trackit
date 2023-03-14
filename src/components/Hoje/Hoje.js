@@ -3,16 +3,16 @@ import styled from "styled-components";
 import Cabesalho from "../Cabesalho";
 import check from "../../assets/check.svg"
 import ProgressoDeHoje from "./ProgressoDeHoje";
+import Rodape from "../Rodape";
 
 export default function Hoje(){
 const [concluidos, setConcluidos] = useState(0)
 
 function fazerEste(){
-    alert("ta fazeno")
     setConcluidos(1)
 }
 
-const habitos = [{habito: "Lavar a louça"}, {habito: "Caminhar"}, {habito: "Fazer carinho nos gatos da rua"}]
+const habitos = [{habito: "Lavar a louça"}]/* {habito:"Almoçar"},{habito:"Almoçar"},{habito:"Almoçar"},{habito: "Caminhar"}, {habito: "Fazer carinho nos gatos da rua"}]*/
 
     return (
         <>
@@ -22,6 +22,7 @@ const habitos = [{habito: "Lavar a louça"}, {habito: "Caminhar"}, {habito: "Faz
         <h2>Terça, 14/03</h2>
         <ProgressoDeHoje feito={concluidos}/>
         </Dia>
+        <ContainerHabitos>
         {habitos.map((h)=>
             <Habito onClick={fazerEste}>
                <div> 
@@ -32,6 +33,8 @@ const habitos = [{habito: "Lavar a louça"}, {habito: "Caminhar"}, {habito: "Faz
             </div>
             <CaixaCheck><img src={check}/></CaixaCheck>
             </Habito>)}
+            </ContainerHabitos>
+            <Rodape/>
         </ContainerHoje>
         </>
     )
@@ -74,6 +77,12 @@ font-size: 22.976px;
 color: #126BA5;
 margin-top: 28px;
 }
+`
+
+const ContainerHabitos = styled.div`
+overflow-y: scroll;
+height: 100%;
+
 `
 
 const Habito = styled.div`

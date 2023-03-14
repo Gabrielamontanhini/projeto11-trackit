@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 
-import lixo from "../assets/trash.svg"
+import lixo from "../../assets/trash.svg"
 
 export default function CorpoHabitos(props){
 
@@ -10,12 +10,14 @@ export default function CorpoHabitos(props){
 
 if (props.habito === false){
     return (
-        <>
+        <> <ContainerHabitos>
         <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
-        </>
+       
+        </ContainerHabitos> </>
     )} else {
         return (
             <>
+            <ContainerHabitos>
             {habitos.map((h)=>
             <Habito><p>{h.habito}</p>
              <Semana>
@@ -29,12 +31,17 @@ if (props.habito === false){
             </Semana>
             <img src={lixo}/>
             </Habito>)}
+            </ContainerHabitos>
             </>
         )
     }
 }
 
+const ContainerHabitos = styled.div`
+overflow-y: scroll;
+height: 100%;
 
+`
 
 const Habito = styled.div`
 width: 340px;
