@@ -1,12 +1,14 @@
 import Cabesalho from "./components/Cabesalho";
-import Habitos from "./components/Habitos";
-import TelaInicial from "./components/TelaInicial";
+import Habitos from "./components/Habitos/Habitos";
+import Hoje from "./components/Hoje/Hoje";
+import TelaInicial from "./components/TelaInicial/TelaInicial";
 
 function App() {
   return (
     <div className="App">
      {/*<TelaInicial/>*/}
-     <Habitos/>
+     {/*<Habitos/>*/}
+     <Hoje/>
     </div>
   );
 }
