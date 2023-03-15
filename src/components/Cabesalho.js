@@ -4,14 +4,21 @@ export default function Cabesalho(){
     return (
         <>
         <CabesalhoTrackit>
-            <h1>TrackIt</h1>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnyvUeQtXQe-IWRCnL7O6lY6a7P-GhxYEJbQ&usqp=CAU"/>
+            <h1>
+                TrackIt
+            </h1>
+            <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnyvUeQtXQe-IWRCnL7O6lY6a7P-GhxYEJbQ&usqp=CAU"
+                />
         </CabesalhoTrackit>
         </>
     )
 }
 
 const CabesalhoTrackit = styled.div`
+position: fixed;
+top: 0px;
+right: 0px;
 width: 100%;
 height: 70px;
 background-color:  #126BA5;
@@ -19,7 +26,11 @@ box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
 display: flex;
 justify-content: space-between;
 align-items: center;
+
 h1{
+
+    font-family: 'Playball';
+font-style: normal;
     font-weight: 400;
 font-size: 38.982px;
 margin-left: 18px;

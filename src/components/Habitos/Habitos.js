@@ -22,24 +22,36 @@ function habitar(){
     return(
         <>
         <ContainerHabitos>
+
         <Cabesalho/>
-        <AdicionarHabito><p>Meus Hábitos</p> <div onClick={configHabito}>+</div></AdicionarHabito>
+
+        <AdicionarHabito>
+            <p>
+                Meus Hábitos
+            </p> 
+            <div onClick={configHabito}>
+                <h3>
+                    +
+                </h3>
+            </div>
+        </AdicionarHabito>
         <ConfigHabito display={display}>
             <input type="text" placeholder="nome do hábito"></input>
             <Semana>
-            <div>D</div>
-            <div>S</div>
-            <div>T</div>
-            <div>Q</div>
-            <div>Q</div>
-            <div>S</div>
-            <div>S</div>
+            <Day>D</Day>
+            <Day>S</Day>
+            <Day>T</Day>
+            <Day>Q</Day>
+            <Day>Q</Day>
+            <Day>S</Day>
+            <Day>S</Day>
             </Semana>
             <Comandos>
                 <p>Cancelar</p>
                 <button onClick={habitar}>Salvar</button>
             </Comandos>
         </ConfigHabito>
+        
         <CorpoHabitos habito={habitos}/>
 
 
@@ -60,10 +72,13 @@ border: 1px solid grey;
 display: flex;
 flex-direction: column;
 align-items: center;
+font-family: 'Lexend Deca';
+font-style: normal;
 `
 
 const AdicionarHabito = styled.div`
-margin-top: 25px;
+margin-top: 45px;
+margin-bottom: 28px;
 width: 90%;
 height: 45px;
 display: flex;
@@ -83,6 +98,10 @@ display: flex;
 align-items: center;
 justify-content: center;
 }
+h3{
+    color: #FFFFFF;
+    font-weight: 400;
+}
 `
 
 const ConfigHabito = styled.div`
@@ -92,18 +111,30 @@ display: ${props => {
 } else {
     return "flex"
 }}};
-width: 340px;
-height: 180px;
+width: 335px;
+height: 280px;
 flex-direction: column;
 justify-content: space-evenly;
 background-color: #FFFFFF;
+border-radius: 5px;
+margin-bottom: 29px;
 input{
+    background: #FFFFFF;
+border: 1px solid #D5D5D5;
+border-radius: 5px;
     width: 303px;
     height: 45px;
     margin-top: 18px;
     margin-left: 18px;
     margin-right: 18px;
     margin-bottom: 8px;
+    ::placeholder{
+        font-weight: 400;
+font-size: 19.976px;
+line-height: 25px;
+margin-left: 15px;
+color: #DBDBDB;
+    }
 }
 `
 
@@ -115,9 +146,12 @@ display: flex;
     button{
         background: #52B6FF;
 border-radius: 4.63636px;
+border: none;
 width: 84px;
 height: 35px;
 margin-right: 16px;
+color: #FFFFFF;
+font-weight: 400;
     }
     p{
         font-weight: 400;
@@ -132,8 +166,8 @@ const Semana = styled.div`
 display: flex;
 width: 65%;
 justify-self: flex-start;
-margin-left: 18px;
-div{
+margin-left: 18px;`
+const Day = styled.div` 
     width: 30px;
     height: 30px;
     border: 1px solid #D5D5D5;
@@ -142,5 +176,6 @@ display: flex;
 align-items: center;
 justify-content: center;
 margin-right: 4px;
-}
+
+color: #DBDBDB;
 `

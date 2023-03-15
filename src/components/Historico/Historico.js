@@ -28,6 +28,8 @@ border: 1px solid grey;
 display: flex;
 flex-direction: column;
 justify-content: space-between;
+font-family: 'Lexend Deca';
+font-style: normal;
 `
 
 const CorpoHistorico = styled.div`
@@ -36,7 +38,7 @@ display: flex;
 flex-direction: column;
 height: 80%;
 margin-left: 20px;
-margin-top: 28px;
+margin-top: 58px;
 h1{
     font-weight: 400;
 font-size: 22.976px;

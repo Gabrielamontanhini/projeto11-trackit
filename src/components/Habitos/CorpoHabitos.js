@@ -40,7 +40,10 @@ if (props.habito === false){
 const ContainerHabitos = styled.div`
 overflow-y: scroll;
 height: 100%;
-
+p{
+    color: #666666;
+    margin-left: 15px;
+}
 `
 
 const Habito = styled.div`
@@ -50,6 +53,8 @@ background: #FFFFFF;
 border-radius: 5px;
 position: relative;
 margin-top: 10px;
+display: flex;
+flex-direction: column;
 img {
     position: absolute;
     right: 10px;
@@ -59,6 +64,7 @@ p{
     margin-left: 15px;
     margin-bottom: 8px;
     margin-top: 15px;
+    color: #666666;
     }
 `
 

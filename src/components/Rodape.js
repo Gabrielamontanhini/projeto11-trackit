@@ -6,23 +6,37 @@ export default function Rodape(){
     return (
         <>
         <RodapeEstilizado>
-<Link to="/habitos"><p>Hábitos</p></Link>
-
-<Link to="/hoje">
-<Bolinha><img src={elipse}/> <h1>Hoje</h1></Bolinha></Link>
-
-<Link to="/historico"><p>Histórico</p></Link>
+            <Link to="/habitos">
+                <p>Hábitos</p>
+            </Link>
+            <Link to="/hoje">
+                <Bolinha>
+                    <img src={elipse}/>
+                    <h1>
+                        Hoje
+                    </h1>
+                </Bolinha>
+            </Link>
+            <Link to="/historico">
+                <p>
+                    Histórico
+                </p>
+            </Link>
         </RodapeEstilizado>
-        
         </>
     )
 }
 
 const RodapeEstilizado = styled.div`
+position: fixed;
+bottom: 0px;
+right: 0px;
 width: 100%;
 height: 70px;
 background-color: #FFFFFF;
 display: flex;
+justify-self: flex-end;
+align-self: flex-end;
 align-items: center;
 justify-content: space-evenly;
 p{

@@ -5,37 +5,37 @@ import check from "../../assets/check.svg"
 import ProgressoDeHoje from "./ProgressoDeHoje";
 import Rodape from "../Rodape";
 
-export default function Hoje(){
-const [concluidos, setConcluidos] = useState(0)
+export default function Hoje() {
+    const [concluidos, setConcluidos] = useState(0)
 
-function fazerEste(){
-    setConcluidos(1)
-}
+    function fazerEste() {
+        setConcluidos(1)
+    }
 
-const habitos = [{habito: "Lavar a louça"}]/* {habito:"Almoçar"},{habito:"Almoçar"},{habito:"Almoçar"},{habito: "Caminhar"}, {habito: "Fazer carinho nos gatos da rua"}]*/
+    const habitos = [{ habito: "Lavar a louça" }]/* {habito:"Almoçar"},{habito:"Almoçar"},{habito:"Almoçar"},{habito: "Caminhar"}, {habito: "Fazer carinho nos gatos da rua"}]*/
 
     return (
         <>
-        <ContainerHoje>
-        <Cabesalho/>
-        <Dia>
-        <h2>Terça, 14/03</h2>
-        <ProgressoDeHoje feito={concluidos}/>
-        </Dia>
-        <ContainerHabitos>
-        {habitos.map((h)=>
-            <Habito onClick={fazerEste}>
-               <div> 
-                <p>{h.habito}</p>
-             <Semana>
-            <div>D</div> <div>S</div> <div>T</div> <div>Q</div> <div>Q</div> <div>S</div> <div>S</div>
-            </Semana>
-            </div>
-            <CaixaCheck><img src={check}/></CaixaCheck>
-            </Habito>)}
-            </ContainerHabitos>
-            <Rodape/>
-        </ContainerHoje>
+            <ContainerHoje>
+                <Cabesalho />
+                <Dia>
+                    <h2>Terça, 14/03</h2>
+                    <ProgressoDeHoje feito={concluidos} />
+                </Dia>
+                <ContainerHabitos>
+                    {habitos.map((h) =>
+                        <Habito onClick={fazerEste}>
+                            <div>
+                                <p>{h.habito}</p>
+                                <Semana>
+                                    <div>D</div> <div>S</div> <div>T</div> <div>Q</div> <div>Q</div> <div>S</div> <div>S</div>
+                                </Semana>
+                            </div>
+                            <CaixaCheck><img src={check} /></CaixaCheck>
+                        </Habito>)}
+                </ContainerHabitos>
+                <Rodape />
+            </ContainerHoje>
         </>
     )
 }
@@ -59,16 +59,20 @@ display: flex;
 flex-direction: column;
 align-items: center;
 background-color: #E5E5E5;
-max-width: 400px;
-height: 667px;
+min-width: 100vw;
+max-width: 500px;
+height: 100vh;
 margin: auto;
-margin-top: 40px;
+margin-top: 70px;
 border: 1px solid grey;
+font-family: 'Lexend Deca';
+font-style: normal;
 `
 const Dia = styled.div`
 height: 90px;
 width: 95%;
-margin-left: 5%;;
+margin-left: 5%;
+margin-bottom: 10px;
 display: flex;
 flex-direction: column;
 h2{
@@ -76,14 +80,16 @@ h2{
 font-size: 22.976px;
 color: #126BA5;
 margin-top: 28px;
+margin-bottom: 8px;
 }
 `
 
 const ContainerHabitos = styled.div`
 overflow-y: scroll;
-height: 100%;
-
+height: 90%;
 `
+
+
 
 const Habito = styled.div`
 display: flex;
@@ -97,6 +103,7 @@ p{
     margin-left: 15px;
     margin-bottom: 8px;
     margin-top: 15px;
+    color: #666666;
     }
 `
 const Semana = styled.div`

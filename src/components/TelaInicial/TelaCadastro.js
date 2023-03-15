@@ -1,31 +1,22 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { Link } from "react-router-dom"
+import styled from "styled-components"
 import logo from "../../assets/logo-completa.svg"
 
-
-
-
-export default function TelaInicial() {
-
-    const [cadastro, setCadastro] = useState(true)
-
-
-        return (
-            <>
-                <ContainerInicial>
-                    <img src={logo} />
-                    <form>
-                        <input type="email" placeholder="email"></input>
-                        <input type="password" placeholder="senha"></input>
-
-                        <Link to="/hoje"> <button><h4>Entrar</h4></button>  </Link>
-                        <Link to="/cadastro"><p>Não tem uma conta? Cadastre-se!</p></Link>
-                    </form>
-                </ContainerInicial>
-            </>
-        )
-    }
+export default function TelaCadastro(){
+    return (
+        <ContainerInicial>
+        <img src={logo} />
+        <form>
+            <input type="email" placeholder="email" ></input>
+            <input type="password" placeholder="senha"></input>
+            <input type="text" placeholder="nome"></input>
+            <input type="url" placeholder="foto"></input>
+         <Link to="/hoje">   <button><h4>Entrar</h4></button></Link>
+            <Link to="/"><p>Já tem uma conta? Faça login!</p></Link>
+        </form>
+    </ContainerInicial>
+    )
+}
 
 
 
