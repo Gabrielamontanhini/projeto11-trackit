@@ -17,14 +17,14 @@ export default function Hoje() {
     return (
         <>
             <ContainerHoje>
-                <Cabesalho />
+                <Cabesalho data-test="header" />
                 <Dia>
-                    <h2>Terça, 14/03</h2>
-                    <ProgressoDeHoje feito={concluidos} />
+                    <h2 data-test="today">Terça, 14/03</h2>
+                    <ProgressoDeHoje data-test="today-counter" feito={concluidos} />
                 </Dia>
                 <ContainerHabitos>
                     {habitos.map((h) =>
-                        <Habito onClick={fazerEste}>
+                        <Habito data-test="today-habit-container"  onClick={fazerEste}>
                             <div>
                                 <p>{h.habito}</p>
                                 <Semana>
@@ -34,7 +34,7 @@ export default function Hoje() {
                             <CaixaCheck><img src={check} /></CaixaCheck>
                         </Habito>)}
                 </ContainerHabitos>
-                <Rodape />
+                <Rodape data-test="menu" />
             </ContainerHoje>
         </>
     )

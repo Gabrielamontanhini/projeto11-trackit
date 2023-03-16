@@ -1,26 +1,43 @@
+import axios from "axios";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../assets/logo-completa.svg"
 
 
 
-
 export default function TelaInicial() {
 
-    const [cadastro, setCadastro] = useState(true)
+const [email, setEmail]=useState("")
+const [senha, setSenha]=useState("")
+ const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
 
+function fazerLogin(e){
+e.preventDefault()
+let objeto = [{email: {email}, senha: {senha}}]
+console.log(objeto)
+//Navigate("/hoje")
+
+const login = axios.post({url}, {
+    email: email,
+    password: senha
+})
+
+login.then((res)=> Navigate("/hoje"))
+login.catch((erro)=> console.log(erro.response.data))
+
+}
 
         return (
             <>
                 <ContainerInicial>
                     <img src={logo} />
-                    <form>
-                        <input type="email" placeholder="email"></input>
-                        <input type="password" placeholder="senha"></input>
+                    <form onSubmit={fazerLogin}>
+                        <input data-test="email-input" type="email" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} required></input>
+                        <input data-test="password-input" type="password" placeholder="senha" value={senha} onChange={e => setSenha(e.target.value)} required></input>
 
-                        <Link to="/hoje"> <button><h4>Entrar</h4></button>  </Link>
-                        <Link to="/cadastro"><p>Não tem uma conta? Cadastre-se!</p></Link>
+                    <button data-test="login-btn" type="submit"><h4>Entrar</h4></button> 
+                        <Link to="/cadastro" data-test="signup-link"><p>Não tem uma conta? Cadastre-se!</p></Link>
                     </form>
                 </ContainerInicial>
             </>

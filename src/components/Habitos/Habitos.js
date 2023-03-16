@@ -23,39 +23,39 @@ function habitar(){
         <>
         <ContainerHabitos>
 
-        <Cabesalho/>
+        <Cabesalho data-test="header"/>
 
         <AdicionarHabito>
             <p>
                 Meus Hábitos
             </p> 
-            <div onClick={configHabito}>
+            <div data-test="habit-create-btn" onClick={configHabito}>
                 <h3>
                     +
                 </h3>
             </div>
         </AdicionarHabito>
-        <ConfigHabito display={display}>
+        <ConfigHabito data-test="habit-create-container" display={display}>
             <input type="text" placeholder="nome do hábito"></input>
             <Semana>
-            <Day>D</Day>
-            <Day>S</Day>
-            <Day>T</Day>
-            <Day>Q</Day>
-            <Day>Q</Day>
-            <Day>S</Day>
-            <Day>S</Day>
+            <Day data-test="habit-day">D</Day>
+            <Day data-test="habit-day">S</Day>
+            <Day data-test="habit-day">T</Day>
+            <Day data-test="habit-day">Q</Day>
+            <Day data-test="habit-day">Q</Day>
+            <Day data-test="habit-day">S</Day>
+            <Day data-test="habit-day">S</Day>
             </Semana>
             <Comandos>
-                <p>Cancelar</p>
-                <button onClick={habitar}>Salvar</button>
+                <p data-test="habit-create-cancel-btn">Cancelar</p>
+                <button data-test="habit-create-save-btn" onClick={habitar}>Salvar</button>
             </Comandos>
         </ConfigHabito>
         
         <CorpoHabitos habito={habitos}/>
 
 
-<Rodape/>
+<Rodape  data-test="menu"/>
         </ContainerHabitos>
         </>
     )

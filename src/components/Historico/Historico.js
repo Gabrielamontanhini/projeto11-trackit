@@ -6,13 +6,13 @@ export default function Historico(){
     return (
         <>
         <ContainerHoje>
-        <Cabesalho/>
+        <Cabesalho data-test="header"/>
 <CorpoHistorico>
     <h1>Histórico</h1>
     <p>Em breve você poderá ver o histórico dos seus hábitos aqui!</p>
 </CorpoHistorico>
 
-        <Rodape/>
+        <Rodape data-test="menu"/>
         </ContainerHoje>
         </>
     )

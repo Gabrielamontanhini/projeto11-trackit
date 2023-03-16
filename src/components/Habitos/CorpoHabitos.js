@@ -19,17 +19,17 @@ if (props.habito === false){
             <>
             <ContainerHabitos>
             {habitos.map((h)=>
-            <Habito><p>{h.habito}</p>
+            <Habito data-test="habit-container" ><p data-test="habit-name">{h.habito}</p>
              <Semana>
-            <div>D</div>
-            <div>S</div>
-            <div>T</div>
-            <div>Q</div>
-            <div>Q</div>
-            <div>S</div>
-            <div>S</div>
+            <div data-test="habit-day" >S</div>
+            <div data-test="habit-day" >T</div>
+            <div data-test="habit-day" >D</div>
+            <div data-test="habit-day" >Q</div>
+            <div data-test="habit-day" >Q</div>
+            <div data-test="habit-day" >S</div>
+            <div data-test="habit-day" >S</div>
             </Semana>
-            <img src={lixo}/>
+            <img src={lixo} data-test="habit-delete-btn"/>
             </Habito>)}
             </ContainerHabitos>
             </>
