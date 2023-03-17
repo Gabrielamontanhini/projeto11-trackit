@@ -4,53 +4,69 @@ import { Link, Navigate, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import logo from "../../assets/logo-completa.svg"
 
-export default function TelaCadastro(){
-    const Navigate =useNavigate()
+export default function TelaCadastro() {
+    const Navigate = useNavigate()
 
-const [email, setEmail]= useState("")
-const [senha, setSenha]= useState("")
-const [nome, setNome]=useState("")
-const [foto, setFoto]=useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [name, setName] = useState("")
+    const [image, setImage] = useState("")
 
 
     const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up"
 
 
-function fazerCadastro(e){
-    e.preventDefault()
-    let objeto = {  email: {email},
-                    name: {nome},
-                    password: {senha}, 
-                    image: {foto}
-                        }
-    const cadastro = axios.post({url}, objeto)
-console.log(objeto)
-    
-    cadastro.then((res)=> {
-        console.log(res.data)
-    Navigate("/hoje")})
-    cadastro.catch((erro)=> alert(erro.response))
-}
+    function fazerCadastro(e) {
+        e.preventDefault()
+        let body = {
+            "email":  email ,
+            "name": name ,
+            "password":  password ,
+            "image": image 
+        }
+        const cadastro = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", body)
+        console.log(body)
+
+        cadastro.then((res) => {
+            console.log(res.data)
+            Navigate("/")
+        })
+        cadastro.catch((erro) => {
+         alert(erro.response.data.message)
+            console.log(erro.response.data.message)
+        }
+            )
+    }
 
 
     return (
         <ContainerInicial>
-        <img src={logo} />
-        <form onSubmit={fazerCadastro}>
-            <input data-test="email-input" type="email" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} required></input>
-            <input data-test="password-input" type="password" placeholder="senha" value={senha} onChange={e => setSenha(e.target.value)} required></input>
-            <input data-test="user-name-input"  type="text" placeholder="nome" value={nome} onChange={e => setNome(e.target.value)} required></input>
-            <input data-test="user-image-input" type="url" placeholder="foto" value={foto} onChange={e => setFoto(e.target.value)} required></input>
+            <img src={logo} />
+            <form onSubmit={fazerCadastro}>
+                <input data-test="email-input" type="email" placeholder="email" value={email} onChange={e => setEmail(e.target.value)}
+                    pattern="^\w+([.-]?\w+)@\w+([.-]?\w+)(\.\w{2,})+$"
+                    title="Precisa ser um email valido. Exemplo (nome@dominio.com)"
+                    required></input>
+                <input data-test="password-input" type="password" placeholder="senha" value={password} onChange={e => setPassword(e.target.value)} required></input>
+                <input data-test="user-name-input" type="text" placeholder="nome" value={name} onChange={e => setName(e.target.value)} required></input>
+                <input data-test="user-image-input" type="url" placeholder="foto" value={image} onChange={e => setImage(e.target.value)}
+                    //pattern="^(?:(?:https?|ftp):\/\/)?(?:www\.)?[a-z0-9]+(?:[\-\.][a-z0-9]+)\.[a-z]{2,6}(?:\/.)?$"
+                   // title="Precisa ser um link de uma imagem válido"
+                    required></input>
 
                 <button data-test="signup-btn" type="submit">
                     <h4>
                         Cadastrar
                     </h4>
                 </button>
-        
-            <Link to="/" data-test="login-link"]><p>Já tem uma conta? Faça login!</p></Link>
-        </form>
-    </ContainerInicial>
+
+                <Link to="/" data-test="login-link">
+                    <p>
+                        Já tem uma conta? Faça login!
+                    </p>
+                </Link>
+            </form>
+        </ContainerInicial>
     )
 }
 

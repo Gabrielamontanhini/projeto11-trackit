@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../assets/logo-completa.svg"
 
@@ -9,23 +9,27 @@ import logo from "../../assets/logo-completa.svg"
 export default function TelaInicial() {
 
 const [email, setEmail]=useState("")
-const [senha, setSenha]=useState("")
- const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
+const [password, setPassword]=useState("")
+const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
 
 function fazerLogin(e){
 e.preventDefault()
-let objeto = [{email: {email}, senha: {senha}}]
-console.log(objeto)
-//Navigate("/hoje")
+let body = {
+    "email": email,
+    "password": password
+    }
+const login = axios.post(
+    "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login",
+    body)
 
-const login = axios.post({url}, {
-    email: email,
-    password: senha
+login.then((res)=>{
+    console.log(body)
+    console.log(res.data)
 })
 
-login.then((res)=> Navigate("/hoje"))
-login.catch((erro)=> console.log(erro.response.data))
-
+login.catch((erro)=> {
+    console.log(erro.response.data)
+})
 }
 
         return (
@@ -33,11 +37,40 @@ login.catch((erro)=> console.log(erro.response.data))
                 <ContainerInicial>
                     <img src={logo} />
                     <form onSubmit={fazerLogin}>
-                        <input data-test="email-input" type="email" placeholder="email" value={email} onChange={e => setEmail(e.target.value)} required></input>
-                        <input data-test="password-input" type="password" placeholder="senha" value={senha} onChange={e => setSenha(e.target.value)} required></input>
+                        <input 
+                        data-test="email-input"
+                        type="email"
+                        placeholder="email" 
+                        value={email} 
+                        onChange={e => setEmail(e.target.value)} 
+                        required
+                        pattern="^\w+([.-]?\w+)@\w+([.-]?\w+)(\.\w{2,})+$"
+                        title="Precisa ser um email valido. Exemplo (nome@dominio.com)"
+                        />
 
-                    <button data-test="login-btn" type="submit"><h4>Entrar</h4></button> 
-                        <Link to="/cadastro" data-test="signup-link"><p>Não tem uma conta? Cadastre-se!</p></Link>
+
+
+
+                        <input
+                        data-test="password-input" 
+                        type="password" 
+                        placeholder="senha" 
+                        value={password} 
+                        onChange={e => setPassword(e.target.value)} 
+                        required/>
+
+                        <Link to="/hoje">
+                            <button data-test="login-btn" type="submit">
+                                <h4>
+                                    Entrar
+                                </h4>
+                            </button> 
+                        </Link>
+                        <Link to="/cadastro" data-test="signup-link">
+                            <p>
+                                Não tem uma conta? Cadastre-se!
+                            </p>
+                        </Link>
                     </form>
                 </ContainerInicial>
             </>
@@ -91,7 +124,6 @@ font-weight: 400;
 font-size: 20.976px;
 line-height: 26px;
 text-align: center;
-
 color: #FFFFFF;
 }
 `
