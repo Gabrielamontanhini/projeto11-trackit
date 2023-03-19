@@ -1,32 +1,34 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import Cabesalho from "../Cabesalho";
 import check from "../../assets/check.svg"
 import ProgressoDeHoje from "./ProgressoDeHoje";
 import Rodape from "../Rodape";
+import { HabitosContext } from "../../contexts/HabitosContext";
+import dayjs from "dayjs";
 
 export default function Hoje() {
     const [concluidos, setConcluidos] = useState(0)
+const { habitosTotais } = useContext(HabitosContext);
 
     function fazerEste() {
         setConcluidos(1)
     }
 
-    const habitos = [{ habito: "Lavar a louça" }]/* {habito:"Almoçar"},{habito:"Almoçar"},{habito:"Almoçar"},{habito: "Caminhar"}, {habito: "Fazer carinho nos gatos da rua"}]*/
 
     return (
         <>
             <ContainerHoje>
                 <Cabesalho data-test="header" />
                 <Dia>
-                    <h2 data-test="today">Terça, 14/03</h2>
+                    <h2 data-test="today"></h2>
                     <ProgressoDeHoje data-test="today-counter" feito={concluidos} />
                 </Dia>
                 <ContainerHabitos>
-                    {habitos.map((h) =>
+                    {habitosTotais.map((h) =>
                         <Habito data-test="today-habit-container"  onClick={fazerEste}>
                             <div>
-                                <p>{h.habito}</p>
+                                <p>{h.name}</p>
                                 <Semana>
                                     <div>D</div> <div>S</div> <div>T</div> <div>Q</div> <div>Q</div> <div>S</div> <div>S</div>
                                 </Semana>
@@ -59,9 +61,9 @@ display: flex;
 flex-direction: column;
 align-items: center;
 background-color: #E5E5E5;
-min-width: 100vw;
-max-width: 500px;
-height: 100vh;
+width: 100%;
+max-width: 400px;
+height: 80vh;
 margin: auto;
 margin-top: 70px;
 border: 1px solid grey;

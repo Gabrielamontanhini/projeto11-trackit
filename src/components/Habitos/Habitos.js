@@ -12,7 +12,6 @@ const {habitosTotais, setHabitosTotais} = useContext(HabitosContext)
     const [display, setDisplay] = useState("none")
     const [habitoNome, setHabitoNome] = useState("")
     const [diasHabito, setDiasHabito] = useState([])
-   // const [habitosTotais, setHabitosTotais] = useState([])
 
 
 
@@ -123,7 +122,7 @@ const {habitosTotais, setHabitosTotais} = useContext(HabitosContext)
                         </Comandos>
                     </ConfigHabito> 
                 </form>
-                <CorpoHabitos token={token} />
+                <CorpoHabitos habitosTotais={habitosTotais} token={token} setHabitosTotais={setHabitosTotais}/>
                 <Rodape data-test="menu" />
             </ContainerHabitos>
         </>

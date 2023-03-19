@@ -33,7 +33,7 @@ if (habitosTotais.length === 0){
             <>
             <ContainerHabitos>
             {habitosTotais.map((h)=>
-            <Habito key={h.id} data-test="habit-container" ><p data-test="habit-name">{h.name} id: {h.id}</p>
+            <Habito key={h.id} data-test="habit-container" ><p data-test="habit-name">{h.name} </p>
             <Semana>
             <div data-test="habit-day" >S</div>
             <div data-test="habit-day" >T</div>
@@ -54,6 +54,7 @@ if (habitosTotais.length === 0){
 const ContainerHabitos = styled.div`
 overflow-y: scroll;
 height: 100%;
+max-width: 400px;
 p{
     color: #666666;
     margin-left: 15px;

@@ -30,8 +30,9 @@ export default function Rodape(){
 const RodapeEstilizado = styled.div`
 position: fixed;
 bottom: 0px;
-right: 0px;
+top: calc(100%-70px);
 width: 100%;
+max-width: 400px;
 height: 70px;
 background-color: #FFFFFF;
 display: flex;

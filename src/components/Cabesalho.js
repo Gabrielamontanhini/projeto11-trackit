@@ -27,8 +27,9 @@ function mostra(){
 const CabesalhoTrackit = styled.div`
 position: fixed;
 top: 0px;
-right: 0px;
+bottom:calc(100vh-140px);
 width: 100%;
+max-width: 400px;
 height: 70px;
 background-color:  #126BA5;
 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
