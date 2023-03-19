@@ -1,14 +1,28 @@
+import axios from "axios"
 import styled from "styled-components"
 
 
 import lixo from "../../assets/trash.svg"
 
-export default function CorpoHabitos(props){
+export default function CorpoHabitos({habitosTotais, token, setHabitosTotais}){
 
-    const habitos = [{habito: "Lavar a louça"}, {habito: "Caminhar"}, {habito: "Fazer carinho nos gatos da rua"}]
+    function deletar(id){
+    const config = { headers: { Authorization: `Bearer ${token}` } }
+
+        const promise= axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config)
+
+        promise.then((res)=> {
+            console.log(`deletado o habito de id ${id}`)
+            setHabitosTotais([...habitosTotais])
+        })
+
+        promise.catch((err)=> {
+            console.log(err.response.data)
+        })
+    }
 
 
-if (props.habito === false){
+if (habitosTotais.length === 0){
     return (
         <> <ContainerHabitos>
         <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
@@ -18,9 +32,9 @@ if (props.habito === false){
         return (
             <>
             <ContainerHabitos>
-            {habitos.map((h)=>
-            <Habito data-test="habit-container" ><p data-test="habit-name">{h.habito}</p>
-             <Semana>
+            {habitosTotais.map((h)=>
+            <Habito key={h.id} data-test="habit-container" ><p data-test="habit-name">{h.name} id: {h.id}</p>
+            <Semana>
             <div data-test="habit-day" >S</div>
             <div data-test="habit-day" >T</div>
             <div data-test="habit-day" >D</div>
@@ -29,7 +43,7 @@ if (props.habito === false){
             <div data-test="habit-day" >S</div>
             <div data-test="habit-day" >S</div>
             </Semana>
-            <img src={lixo} data-test="habit-delete-btn"/>
+            <img src={lixo} data-test="habit-delete-btn" onClick={()=>deletar(h.id)}/>
             </Habito>)}
             </ContainerHabitos>
             </>

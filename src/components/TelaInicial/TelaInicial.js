@@ -6,11 +6,15 @@ import logo from "../../assets/logo-completa.svg"
 
 
 
-export default function TelaInicial() {
-
+export default function TelaInicial({setToken}) {
+const navigate = useNavigate()
 const [email, setEmail]=useState("")
 const [password, setPassword]=useState("")
+
+
+
 const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
+
 
 function fazerLogin(e){
 e.preventDefault()
@@ -18,17 +22,19 @@ let body = {
     "email": email,
     "password": password
     }
+
 const login = axios.post(
     "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login",
     body)
 
 login.then((res)=>{
-    console.log(body)
     console.log(res.data)
+    setToken(res.data.token)
+    navigate("/hoje")
 })
 
 login.catch((erro)=> {
-    console.log(erro.response.data)
+    console.log(erro.response.data.message)
 })
 }
 
@@ -47,10 +53,6 @@ login.catch((erro)=> {
                         pattern="^\w+([.-]?\w+)@\w+([.-]?\w+)(\.\w{2,})+$"
                         title="Precisa ser um email valido. Exemplo (nome@dominio.com)"
                         />
-
-
-
-
                         <input
                         data-test="password-input" 
                         type="password" 
@@ -58,14 +60,11 @@ login.catch((erro)=> {
                         value={password} 
                         onChange={e => setPassword(e.target.value)} 
                         required/>
-
-                        <Link to="/hoje">
                             <button data-test="login-btn" type="submit">
                                 <h4>
                                     Entrar
                                 </h4>
                             </button> 
-                        </Link>
                         <Link to="/cadastro" data-test="signup-link">
                             <p>
                                 Não tem uma conta? Cadastre-se!

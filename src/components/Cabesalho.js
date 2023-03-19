@@ -1,14 +1,23 @@
+import { useContext } from "react"
 import styled from "styled-components"
+import { UserContext } from "../contexts/UserContext"
 
 export default function Cabesalho(){
+
+const {user}=useContext(UserContext)
+
+function mostra(){
+    console.log({user}.user.image)
+}
+
     return (
         <>
         <CabesalhoTrackit>
             <h1>
                 TrackIt
             </h1>
-            <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnyvUeQtXQe-IWRCnL7O6lY6a7P-GhxYEJbQ&usqp=CAU"
+            <img onClick={mostra}
+                src={{user}.user.image}
                 />
         </CabesalhoTrackit>
         </>

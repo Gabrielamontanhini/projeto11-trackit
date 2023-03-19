@@ -4,7 +4,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import logo from "../../assets/logo-completa.svg"
 
-export default function TelaCadastro() {
+export default function TelaCadastro({setUser}) {
     const Navigate = useNavigate()
 
     const [email, setEmail] = useState("")
@@ -14,28 +14,29 @@ export default function TelaCadastro() {
 
 
     const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up"
-
+    let body = {
+        "email": email,
+        "name": name,
+        "password": password,
+        "image": image
+    }
 
     function fazerCadastro(e) {
         e.preventDefault()
-        let body = {
-            "email":  email ,
-            "name": name ,
-            "password":  password ,
-            "image": image 
-        }
+
         const cadastro = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", body)
         console.log(body)
 
         cadastro.then((res) => {
             console.log(res.data)
+setUser(body)
             Navigate("/")
         })
         cadastro.catch((erro) => {
-         alert(erro.response.data.message)
+            alert(erro.response.data.message)
             console.log(erro.response.data.message)
         }
-            )
+        )
     }
 
 
@@ -51,7 +52,7 @@ export default function TelaCadastro() {
                 <input data-test="user-name-input" type="text" placeholder="nome" value={name} onChange={e => setName(e.target.value)} required></input>
                 <input data-test="user-image-input" type="url" placeholder="foto" value={image} onChange={e => setImage(e.target.value)}
                     //pattern="^(?:(?:https?|ftp):\/\/)?(?:www\.)?[a-z0-9]+(?:[\-\.][a-z0-9]+)\.[a-z]{2,6}(?:\/.)?$"
-                   // title="Precisa ser um link de uma imagem válido"
+                    // title="Precisa ser um link de uma imagem válido"
                     required></input>
 
                 <button data-test="signup-btn" type="submit">

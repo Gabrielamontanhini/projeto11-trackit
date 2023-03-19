@@ -1,62 +1,131 @@
-import { useState } from "react";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
+import { HabitosContext } from "../../contexts/HabitosContext";
 import Cabesalho from "../Cabesalho";
 import Rodape from "../Rodape";
 import CorpoHabitos from "./CorpoHabitos";
 
-export default function Habitos(){
-const [habitos, setHabitos] = useState(false)
+export default function Habitos({ token }) {
+const {habitosTotais, setHabitosTotais} = useContext(HabitosContext)
+    
+    const [display, setDisplay] = useState("none")
+    const [habitoNome, setHabitoNome] = useState("")
+    const [diasHabito, setDiasHabito] = useState([])
+   // const [habitosTotais, setHabitosTotais] = useState([])
 
-const [display, setDisplay]=useState(false)
 
 
-function configHabito(){
-setDisplay(true)
-}
+    useEffect(() => {
+        const config = {   headers: {   Authorization: `Bearer ${token}` }   }
 
-function habitar(){
-    setHabitos(true)
-    setDisplay(false)
-}
+        const promise = axios.get( "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config )
 
-    return(
+        promise.then((res) => {          
+            setHabitosTotais(res.data)
+        })
+
+        promise.catch((err) => {
+            console.log(err.response.data)
+        })
+    }, [habitosTotais])
+
+    function adicionarDia(d) {
+        const dia = d
+        setDiasHabito([...diasHabito, dia])
+        console.log([...diasHabito, dia])
+    }
+
+
+    function novoHabito() {
+        setDisplay("flex")
+    }
+
+    function cancelarNovoHabito() {
+        setDisplay("none")
+    }
+
+    function habitar(e) {
+        e.preventDefault()
+        const config = { headers: {  Authorization: `Bearer ${token}`  }   }
+        let body = {
+            "name": habitoNome,
+            "days": diasHabito
+        }
+        setHabitosTotais([...habitosTotais, body])
+        const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body , config)
+
+        promise.then((res) => {
+            console.log("deu certo")
+            console.log(res.data)
+        })
+        promise.catch((err) => console.log(err.response.data))
+        setHabitoNome("")
+        setDiasHabito([])
+        setDisplay("none")
+    }
+
+    return (
         <>
-        <ContainerHabitos>
-
-        <Cabesalho data-test="header"/>
-
-        <AdicionarHabito>
-            <p>
-                Meus Hábitos
-            </p> 
-            <div data-test="habit-create-btn" onClick={configHabito}>
-                <h3>
-                    +
-                </h3>
-            </div>
-        </AdicionarHabito>
-        <ConfigHabito data-test="habit-create-container" display={display}>
-            <input type="text" placeholder="nome do hábito"></input>
-            <Semana>
-            <Day data-test="habit-day">D</Day>
-            <Day data-test="habit-day">S</Day>
-            <Day data-test="habit-day">T</Day>
-            <Day data-test="habit-day">Q</Day>
-            <Day data-test="habit-day">Q</Day>
-            <Day data-test="habit-day">S</Day>
-            <Day data-test="habit-day">S</Day>
-            </Semana>
-            <Comandos>
-                <p data-test="habit-create-cancel-btn">Cancelar</p>
-                <button data-test="habit-create-save-btn" onClick={habitar}>Salvar</button>
-            </Comandos>
-        </ConfigHabito>
-        
-        <CorpoHabitos habito={habitos}/>
-
-
-<Rodape  data-test="menu"/>
-        </ContainerHabitos>
+            <ContainerHabitos>
+                <Cabesalho data-test="header" />
+                <AdicionarHabito>
+                    <p>
+                        Meus Hábitos
+                    </p>
+                    <div data-test="habit-create-btn" onClick={novoHabito}>
+                        <h3>
+                            +
+                        </h3>
+                    </div>
+                </AdicionarHabito>
+                <form onSubmit={habitar}>
+                    <ConfigHabito
+                        data-test="habit-create-container"
+                        display={display}
+                    >
+                        <input
+                            type="text"
+                            placeholder=" Nome do hábito"
+                            value={habitoNome}
+                            onChange={e => setHabitoNome(e.target.value)}
+                        />
+                        <Semana>
+                            <Day data-test="habit-day" onClick={() => adicionarDia(0)}>
+                                <h1>D</h1>
+                            </Day>
+                            <Day data-test="habit-day" onClick={() => adicionarDia(1)}>
+                                <h1>S</h1>
+                            </Day>
+                            <Day data-test="habit-day" onClick={() => adicionarDia(2)}>
+                                <h1>T</h1>
+                            </Day>
+                            <Day data-test="habit-day" onClick={() => adicionarDia(3)}>
+                                <h1>Q</h1>
+                            </Day>
+                            <Day data-test="habit-day" onClick={() => adicionarDia(4)}>
+                                <h1>Q</h1>
+                            </Day>
+                            <Day data-test="habit-day" onClick={() => adicionarDia(5)}>
+                                <h1>S</h1>
+                            </Day>
+                            <Day data-test="habit-day" onClick={() => adicionarDia(6)}>
+                                <h1>S</h1>
+                            </Day>
+                        </Semana>
+                        <Comandos>
+                            <p data-test="habit-create-cancel-btn" onClick={cancelarNovoHabito}>
+                                Cancelar
+                            </p>
+                            <button type="submit" data-test="habit-create-save-btn">
+                                Salvar
+                            </button>
+                        </Comandos>
+                    </ConfigHabito> 
+                </form>
+                <CorpoHabitos token={token} />
+                <Rodape data-test="menu" />
+            </ContainerHabitos>
         </>
     )
 }
@@ -106,13 +175,14 @@ h3{
 
 const ConfigHabito = styled.div`
 display: ${props => {
-    if (props.display === false){
-    return "none"
-} else {
-    return "flex"
-}}};
+        if (props.display === "none") {
+            return "none"
+        } else {
+            return "flex"
+        }
+    }};
 width: 335px;
-height: 280px;
+height: 230px;
 flex-direction: column;
 justify-content: space-evenly;
 background-color: #FFFFFF;
@@ -162,11 +232,13 @@ margin-right: 23px;
 `
 
 const Semana = styled.div`
-
 display: flex;
 width: 65%;
 justify-self: flex-start;
-margin-left: 18px;`
+margin-left: 18px;
+`
+
+
 const Day = styled.div` 
     width: 30px;
     height: 30px;
@@ -176,6 +248,9 @@ display: flex;
 align-items: center;
 justify-content: center;
 margin-right: 4px;
-
 color: #DBDBDB;
+h1{
+    font-weight: 400;
+    color: #DBDBDB;
+}
 `
