@@ -19,7 +19,7 @@ useEffect(()=>{
 
 
 
-    if (props.progresso === 0){
+    if (props.progresso === 0 || porcentagem === NaN){
         return (
             <>
             <AindaNada data-test="today-counter">Nenhum hábito concluído ainda</AindaNada>
