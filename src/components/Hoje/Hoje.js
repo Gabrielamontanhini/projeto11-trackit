@@ -27,7 +27,7 @@ const { habitosTotais } = useContext(HabitosContext);
             <ContainerHoje>
                 <Cabesalho data-test="header" />
                 <Dia>
-                    <h2 data-test="today">{/*dayjs.utc().local().format()*/}</h2>
+                    <h2 data-test="today">{dayjs().month()}</h2>
                     <ProgressoDeHoje 
                     data-test="today-counter" 
                     feito={concluidos} 

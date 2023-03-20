@@ -15,10 +15,10 @@ export default function Habitos({ token }) {
     const [display, setDisplay] = useState("none")
     const [habitoNome, setHabitoNome] = useState("")
     const [diasHabito, setDiasHabito] = useState([])
-    const [naoClicavel, setNaoClicavel]=useState(false)
+    const [naoClicavel, setNaoClicavel] = useState(false)
 
 
-    
+
     useEffect(() => {
         const config = { headers: { Authorization: `Bearer ${token}` } }
 
@@ -35,16 +35,16 @@ export default function Habitos({ token }) {
 
     function adicionarDia(i) {
         const dia = i
-        if (!diasHabito.includes(dia)){
+        if (!diasHabito.includes(dia)) {
             setDiasHabito([...diasHabito, dia])
             console.log([...diasHabito, dia])
-        } else if (diasHabito.includes(dia)){
-          let novaArray = diasHabito.filter(d=> d !== dia) 
+        } else if (diasHabito.includes(dia)) {
+            let novaArray = diasHabito.filter(d => d !== dia)
             console.log(novaArray)
             setDiasHabito(novaArray)
         }
-        
-        
+
+
     }
 
 
@@ -124,14 +124,14 @@ export default function Habitos({ token }) {
                         </Semana>
                         <Comandos>
                             <p data-test="habit-create-cancel-btn"
-                            disabled={naoClicavel}
-                            onClick={cancelarNovoHabito}>
+                                disabled={naoClicavel}
+                                onClick={cancelarNovoHabito}>
                                 Cancelar
                             </p>
-                            <button 
-                            data-test="habit-create-save-btn" 
-                            disabled={naoClicavel}
-                            type="submit" >
+                            <button
+                                data-test="habit-create-save-btn"
+                                disabled={naoClicavel}
+                                type="submit" >
                                 <h4> Salvar</h4>
                             </button>
                         </Comandos>

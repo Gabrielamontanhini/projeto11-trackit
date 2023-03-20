@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom"
 import styled from "styled-components"
 import elipse from "../assets/elipse.svg"
+import dayjs from "dayjs"
 
 export default function Rodape(){
+function teste(){
+    console.log(dayjs().day())
+}
+
     return (
         <>
         <RodapeEstilizado  data-test="menu">
@@ -10,9 +15,9 @@ export default function Rodape(){
                 <p>Hábitos</p>
             </Link>
             <Link to="/hoje" data-test="today-link"> 
-                <Bolinha >
+                <Bolinha onClick={teste}>
                     <img src={elipse}/>
-                    <h1>
+                    <h1 >
                         Hoje
                     </h1>
                 </Bolinha>
