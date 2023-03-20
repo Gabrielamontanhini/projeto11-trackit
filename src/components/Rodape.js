@@ -4,8 +4,11 @@ import elipse from "../assets/elipse.svg"
 import dayjs from "dayjs"
 import { useContext } from "react"
 import { HabitosContext } from "../contexts/HabitosContext"
+import { ProgressBar } from "react-loader-spinner"
+import { buildStyles, CircularProgressbar } from "react-circular-progressbar"
+import "react-circular-progressbar/dist/styles.css"
 
-export default function Rodape(){
+export default function Rodape(props){
 
     
     const { habitosTotais } = useContext(HabitosContext);
@@ -21,10 +24,18 @@ function teste(){
             </Link>
             <Link to="/hoje" data-test="today-link"> 
                 <Bolinha onClick={teste}>
-                    <img src={elipse}/>
-                    <h1 >
-                        Hoje
-                    </h1>
+                <CircularProgressbar
+            value={props.porcentagem}
+            text={`Hoje`}
+            background
+            backgroundPadding={6}
+            styles={buildStyles({
+              backgroundColor: "#52B6FF",
+              textColor: "#ffffff",
+              pathColor: "#ffffff",
+              trailColor: "transparent",
+            })}
+          />
                 </Bolinha>
             </Link>
             <Link to="/historico" data-test="history-link" >

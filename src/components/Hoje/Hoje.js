@@ -131,7 +131,7 @@ console.log(h)
                             </CaixaCheck>
                         </Habito>)}
                 </ContainerHabitos>
-                <Rodape data-test="menu" />
+                <Rodape data-test="menu" porcentagem={razao} />
             </ContainerHoje>
         </>
     )
