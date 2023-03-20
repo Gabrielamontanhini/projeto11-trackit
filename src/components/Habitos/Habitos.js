@@ -15,6 +15,7 @@ export default function Habitos({ token }) {
     const [display, setDisplay] = useState("none")
     const [habitoNome, setHabitoNome] = useState("")
     const [diasHabito, setDiasHabito] = useState([])
+    const [naoClicavel, setNaoClicavel]=useState(false)
 
 
     
@@ -32,10 +33,18 @@ export default function Habitos({ token }) {
         })
     }, [habitosTotais])
 
-    function adicionarDia(d) {
-        const dia = d
-        setDiasHabito([...diasHabito, dia])
-        console.log([...diasHabito, dia])
+    function adicionarDia(i) {
+        const dia = i
+        if (!diasHabito.includes(dia)){
+            setDiasHabito([...diasHabito, dia])
+            console.log([...diasHabito, dia])
+        } else if (diasHabito.includes(dia)){
+          let novaArray = diasHabito.filter(d=> d !== dia) 
+            console.log(novaArray)
+            setDiasHabito(novaArray)
+        }
+        
+        
     }
 
 
@@ -51,6 +60,7 @@ export default function Habitos({ token }) {
 
     function habitar(e) {
         e.preventDefault()
+        setNaoClicavel(true)
         const config = { headers: { Authorization: `Bearer ${token}` } }
         let body = {
             "name": habitoNome,
@@ -62,11 +72,13 @@ export default function Habitos({ token }) {
         promise.then((res) => {
             console.log("deu certo")
             console.log(res.data)
+            setNaoClicavel(false)
         })
         promise.catch((err) => console.log(err.response.data))
         setHabitoNome("")
         setDiasHabito([])
         setDisplay("none")
+        setNaoClicavel(false)
     }
 
     return (
@@ -91,6 +103,7 @@ export default function Habitos({ token }) {
                         <input
                             data-test="habit-name-input"
                             type="text"
+                            disabled={naoClicavel}
                             placeholder=" Nome do hábito"
                             value={habitoNome}
                             onChange={e => setHabitoNome(e.target.value)}
@@ -100,6 +113,7 @@ export default function Habitos({ token }) {
                             {SEMANA.map((d, i) => <Day
                                 data-test="habit-day"
                                 key={d.i}
+                                disabled={naoClicavel}
                                 i={i}
                                 dia={d.dia}
                                 function={() => adicionarDia(i)}
@@ -109,10 +123,15 @@ export default function Habitos({ token }) {
                             </Day>)}
                         </Semana>
                         <Comandos>
-                            <p data-test="habit-create-cancel-btn" onClick={cancelarNovoHabito}>
+                            <p data-test="habit-create-cancel-btn"
+                            disabled={naoClicavel}
+                            onClick={cancelarNovoHabito}>
                                 Cancelar
                             </p>
-                            <button data-test="habit-create-save-btn" type="submit" >
+                            <button 
+                            data-test="habit-create-save-btn" 
+                            disabled={naoClicavel}
+                            type="submit" >
                                 <h4> Salvar</h4>
                             </button>
                         </Comandos>

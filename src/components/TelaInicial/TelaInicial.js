@@ -41,7 +41,9 @@ login.then((res)=>{
 })
 
 login.catch((erro)=> {
-    console.log(erro.response.data.message)
+    alert(erro.response.data.message)
+    setEmail("")
+    setPassword("")
 })
 }
 
@@ -75,8 +77,8 @@ login.catch((erro)=> {
                             type="submit">
                                 <Entrar entrar={entrar}/>
                             </button> 
-                        <Link to="/cadastro" data-test="signup-link">
-                            <p>
+                        <Link to="/cadastro" data-test="signup-link" disabled={naoClicavel} >
+                            <p disabled={naoClicavel}>
                                 Não tem uma conta? Cadastre-se!
                             </p>
                         </Link>

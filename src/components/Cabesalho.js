@@ -12,7 +12,7 @@ function mostra(){
 
     return (
         <>
-        <CabesalhoTrackit>
+        <CabesalhoTrackit data-test="header">
             <h1>
                 TrackIt
             </h1>

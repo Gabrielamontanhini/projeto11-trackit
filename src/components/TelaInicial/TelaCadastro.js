@@ -4,6 +4,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import logo from "../../assets/logo-completa.svg"
 import { ThreeDots } from 'react-loader-spinner'
+import Cadastrar from "./Cadastrar"
 
 export default function TelaCadastro({setUser}) {
     const Navigate = useNavigate()
@@ -62,7 +63,7 @@ setUser(body)
                     pattern="^\w+([.-]?\w+)@\w+([.-]?\w+)(\.\w{2,})+$"
                     title="Precisa ser um email valido. Exemplo (nome@dominio.com)"
                 required/>
-                
+
                 <input 
                 data-test="password-input" 
                 type="password" 
@@ -94,9 +95,9 @@ setUser(body)
                 data-test="signup-btn" 
                 type="submit"
                 disabled={naoClicavel} >
-                    <h4>
-                        {cadastrar}
-                    </h4>
+                    
+                        <Cadastrar cadastrar={cadastrar}/>
+                    
                 </button>
 
                 <Link to="/" data-test="login-link">
