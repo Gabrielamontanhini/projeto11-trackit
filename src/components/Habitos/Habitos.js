@@ -168,10 +168,9 @@ export default function Habitos({ token }) {
 const ContainerHabitos = styled.div`
 background-color: #E5E5E5;
 max-width: 400px;
-height: 667px;
+height: 80vh;
 margin: auto;
-margin-top: 40px;
-border: 1px solid grey;
+margin-top: 70px;
 display: flex;
 flex-direction: column;
 align-items: center;

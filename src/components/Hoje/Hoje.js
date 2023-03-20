@@ -182,7 +182,6 @@ max-width: 400px;
 height: 80vh;
 margin: auto;
 margin-top: 70px;
-border: 1px solid grey;
 font-family: 'Lexend Deca';
 font-style: normal;
 `
