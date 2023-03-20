@@ -6,6 +6,10 @@ import lixo from "../../assets/trash.svg"
 
 export default function CorpoHabitos({ habitosTotais, token, setHabitosTotais }) {
 
+
+
+
+
     function deletar(id) {
         
         const config = { headers: { Authorization: `Bearer ${token}` } }
@@ -37,6 +41,8 @@ export default function CorpoHabitos({ habitosTotais, token, setHabitosTotais })
                     {habitosTotais.map((h) =>
                         <Habito key={h.id} 
                         data-test="habit-container" 
+
+                        
                         >
                             <p 
                             data-test="habit-name"
@@ -56,8 +62,8 @@ export default function CorpoHabitos({ habitosTotais, token, setHabitosTotais })
 
                             </Semana>
                             <img src={lixo} 
-                            data-test="habit-delete-btn" 
-                            onClick={() => deletar(h.id)} 
+                            data-test="habit-delete-btn"
+                           onClick={() => deletar(h.id)} 
                             />
                         </Habito>)}
                 </ContainerHabitos>

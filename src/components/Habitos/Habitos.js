@@ -62,7 +62,7 @@ export default function Habitos({ token }) {
     function habitar(e) {
         e.preventDefault()
         setNaoClicavel(true)
-        if ({habitoNome} === ""){
+        if (habitoNome == " " || habitoNome == null){
             alert("Preencha o nome do hábito!")
             setHabitoNome("")
             setDiasHabito([])
