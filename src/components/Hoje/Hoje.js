@@ -120,8 +120,8 @@ console.log(h)
                                 <h1 data-test="today-habit-name">
                                     {h.name} de id: {h.id}
                                 </h1>
-                                <h3>Sequência atual: {h.currentSequence}</h3>
-                                <h3>Seu recorde: {h.highestSequence}</h3>
+                                <h3>Sequência atual:<Sequencia feito={h.done}> {h.currentSequence} dia(s)</Sequencia></h3>
+                                <h3>Seu recorde:<Sequencia feito={(h.currentSequence)<=(h.highestSequence)&&(h.highestSequence !== 0) ? true : false} > {h.highestSequence} dia(s)</Sequencia> </h3>
                             </div>
                             <CaixaCheck
                                 data-test="today-habit-check-btn"
@@ -137,6 +137,16 @@ console.log(h)
     )
 }
 
+
+const Sequencia = styled.strong `
+color: ${props => {
+    if (props.feito=== true){
+        return "#8FC549";
+    } else {
+        return "#666666"
+    }
+}};
+`
 
 const CaixaCheck = styled.div`
 display: flex;
