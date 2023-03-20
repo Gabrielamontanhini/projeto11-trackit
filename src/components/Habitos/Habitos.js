@@ -5,6 +5,9 @@ import { HabitosContext } from "../../contexts/HabitosContext";
 import Cabesalho from "../Cabesalho";
 import Rodape from "../Rodape";
 import CorpoHabitos from "./CorpoHabitos";
+import SEMANA from "../../semana";
+
+
 
 export default function Habitos({ token }) {
 const {habitosTotais, setHabitosTotais} = useContext(HabitosContext)
@@ -13,6 +16,7 @@ const {habitosTotais, setHabitosTotais} = useContext(HabitosContext)
     const [habitoNome, setHabitoNome] = useState("")
     const [diasHabito, setDiasHabito] = useState([])
 
+    //const semana = [{id: 0, dia: "D"}, {id: 1, dia: "S"},{id: 2, dia: "T"},{id: 3, dia: "Q"},{id: 4, dia: "Q"},{id: 5, dia: "S"},{id: 6, dia: "S"}]
 
 
     useEffect(() => {
@@ -42,6 +46,8 @@ const {habitosTotais, setHabitosTotais} = useContext(HabitosContext)
 
     function cancelarNovoHabito() {
         setDisplay("none")
+        setDiasHabito([])
+        setHabitoNome("")
     }
 
     function habitar(e) {
@@ -90,27 +96,16 @@ const {habitosTotais, setHabitosTotais} = useContext(HabitosContext)
                             onChange={e => setHabitoNome(e.target.value)}
                         />
                         <Semana>
-                            <Day data-test="habit-day" onClick={() => adicionarDia(0)}>
-                                <h1>D</h1>
-                            </Day>
-                            <Day data-test="habit-day" onClick={() => adicionarDia(1)}>
-                                <h1>S</h1>
-                            </Day>
-                            <Day data-test="habit-day" onClick={() => adicionarDia(2)}>
-                                <h1>T</h1>
-                            </Day>
-                            <Day data-test="habit-day" onClick={() => adicionarDia(3)}>
-                                <h1>Q</h1>
-                            </Day>
-                            <Day data-test="habit-day" onClick={() => adicionarDia(4)}>
-                                <h1>Q</h1>
-                            </Day>
-                            <Day data-test="habit-day" onClick={() => adicionarDia(5)}>
-                                <h1>S</h1>
-                            </Day>
-                            <Day data-test="habit-day" onClick={() => adicionarDia(6)}>
-                                <h1>S</h1>
-                            </Day>
+
+                            {SEMANA.map((d, i)=> <Day 
+                            key={d.i} 
+                            i={i} 
+                            dia={d.dia} 
+                            function={()=>adicionarDia(i)} 
+                            estado={diasHabito.includes(i) ? "pego" : "nn"} 
+                            onClick={()=> adicionarDia(i)}>
+                                <h1>{d.dia}</h1>
+                                </Day>)}
                         </Semana>
                         <Comandos>
                             <p data-test="habit-create-cancel-btn" onClick={cancelarNovoHabito}>
@@ -122,6 +117,9 @@ const {habitosTotais, setHabitosTotais} = useContext(HabitosContext)
                         </Comandos>
                     </ConfigHabito> 
                 </form>
+
+
+
                 <CorpoHabitos habitosTotais={habitosTotais} token={token} setHabitosTotais={setHabitosTotais}/>
                 <Rodape data-test="menu" />
             </ContainerHabitos>
@@ -248,8 +246,21 @@ align-items: center;
 justify-content: center;
 margin-right: 4px;
 color: #DBDBDB;
-h1{
-    font-weight: 400;
-    color: #DBDBDB;
+background-color: ${props => {
+    if (props.estado === "pego"){
+        return "#CFCFCF"
+    } else if (props.estado === "nn"){
+        return "white"
+    } 
+}};
+& h1{
+    font-weight: 600;
+    color: ${props => {
+    if (props.estado === "pego"){
+        return "white"
+    } else if (props.estado === "nn"){
+        return "#DBDBDB"
+    } 
+}};
 }
 `

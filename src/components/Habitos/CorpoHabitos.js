@@ -1,51 +1,50 @@
 import axios from "axios"
 import styled from "styled-components"
 
-
+import SEMANA from "../../semana"
 import lixo from "../../assets/trash.svg"
 
-export default function CorpoHabitos({habitosTotais, token, setHabitosTotais}){
+export default function CorpoHabitos({ habitosTotais, token, setHabitosTotais }) {
 
-    function deletar(id){
-    const config = { headers: { Authorization: `Bearer ${token}` } }
+    function deletar(id) {
+        const config = { headers: { Authorization: `Bearer ${token}` } }
 
-        const promise= axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config)
+        const promise = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config)
 
-        promise.then((res)=> {
+        promise.then((res) => {
             console.log(`deletado o habito de id ${id}`)
             setHabitosTotais([...habitosTotais])
         })
 
-        promise.catch((err)=> {
+        promise.catch((err) => {
             console.log(err.response.data)
         })
     }
 
 
-if (habitosTotais.length === 0){
-    return (
-        <> <ContainerHabitos>
-        <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
-       
-        </ContainerHabitos> </>
-    )} else {
+    if (habitosTotais.length === 0) {
+        return (
+            <> <ContainerHabitos>
+                <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
+
+            </ContainerHabitos> </>
+        )
+    } else {
         return (
             <>
-            <ContainerHabitos>
-            {habitosTotais.map((h)=>
-            <Habito key={h.id} data-test="habit-container" ><p data-test="habit-name">{h.name} </p>
-            <Semana>
-            <div data-test="habit-day" >S</div>
-            <div data-test="habit-day" >T</div>
-            <div data-test="habit-day" >D</div>
-            <div data-test="habit-day" >Q</div>
-            <div data-test="habit-day" >Q</div>
-            <div data-test="habit-day" >S</div>
-            <div data-test="habit-day" >S</div>
-            </Semana>
-            <img src={lixo} data-test="habit-delete-btn" onClick={()=>deletar(h.id)}/>
-            </Habito>)}
-            </ContainerHabitos>
+                <ContainerHabitos>
+                    {habitosTotais.map((h) =>
+                        <Habito key={h.id} data-test="habit-container" >
+                            <p data-test="habit-name">
+                                {h.name} </p>
+                            <Semana>
+
+                                {SEMANA.map((d, i) => <Diaa key={d.i} estado={h.days.includes(i) ? "pego" : "nn"}><h1>{d.dia}</h1></Diaa>)}
+
+                            </Semana>
+                            <img src={lixo} data-test="habit-delete-btn" onClick={() => deletar(h.id)} />
+                        </Habito>)}
+                </ContainerHabitos>
             </>
         )
     }
@@ -84,13 +83,13 @@ p{
 `
 
 const Semana = styled.div`
-
 display: flex;
 width: 65%;
 justify-self: flex-start;
 margin-left: 18px;
-div{
-    width: 30px;
+`
+const Diaa = styled.div` 
+ width: 30px;
     height: 30px;
     border: 1px solid #D5D5D5;
 border-radius: 5px;
@@ -98,5 +97,21 @@ display: flex;
 align-items: center;
 justify-content: center;
 margin-right: 4px;
+background-color: ${props => {
+        if (props.estado === "pego") {
+            return "#CFCFCF"
+        } else {
+            return "white"
+        }
+    }};
+& h1{
+    font-weight: 600;
+    color: ${props => {
+        if (props.estado === "pego") {
+            return "white"
+        } else if (props.estado === "nn") {
+            return "#DBDBDB"
+        }
+    }};
 }
 `

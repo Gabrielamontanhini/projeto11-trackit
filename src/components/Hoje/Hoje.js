@@ -6,6 +6,7 @@ import ProgressoDeHoje from "./ProgressoDeHoje";
 import Rodape from "../Rodape";
 import { HabitosContext } from "../../contexts/HabitosContext";
 import dayjs from "dayjs";
+import "dayjs/locale/pt-br";
 
 export default function Hoje() {
     const [concluidos, setConcluidos] = useState(0)
@@ -16,12 +17,13 @@ const { habitosTotais } = useContext(HabitosContext);
     }
 
 
+
     return (
         <>
             <ContainerHoje>
                 <Cabesalho data-test="header" />
                 <Dia>
-                    <h2 data-test="today"></h2>
+                    <h2 data-test="today">{/*dayjs.utc().local().format()*/}</h2>
                     <ProgressoDeHoje data-test="today-counter" feito={concluidos} />
                 </Dia>
                 <ContainerHabitos>
