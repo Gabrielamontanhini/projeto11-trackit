@@ -7,6 +7,7 @@ import lixo from "../../assets/trash.svg"
 export default function CorpoHabitos({ habitosTotais, token, setHabitosTotais }) {
 
     function deletar(id) {
+        
         const config = { headers: { Authorization: `Bearer ${token}` } }
 
         const promise = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config)

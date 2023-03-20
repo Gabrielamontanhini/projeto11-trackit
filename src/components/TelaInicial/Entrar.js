@@ -11,7 +11,7 @@ export default function Entrar({entrar}){
         return (
             <ThreeDots
 width="330px"
-height="40px"
+height="30px"
 color="white"
 />
         )

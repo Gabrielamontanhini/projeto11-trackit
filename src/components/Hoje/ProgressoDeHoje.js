@@ -9,27 +9,17 @@ export default function ProgressoDeHoje(props){
 
 
 
-const [razao, setRazao]=useState(0)
+const [porcentagem, setPorcentagem]=useState()
 
 
 
 useEffect(()=>{
-    let a = habitosTotais.length
-    let b = props.feito.length
-    let porcentagem = (b/a)*100
-    setRazao(porcentagem)
-    console.log({razao})
-}, [props.feito])
+    setPorcentagem(props.progresso)
+}, [props.progresso])
 
 
-function Dizai(){
-let a = habitosTotais.length
-let b = props.feito.length
-let porcentagem = (b/a)*100
-setRazao(porcentagem)
-console.log({razao})
-}
-    if (props.feito.length === 0){
+
+    if (props.progresso === 0){
         return (
             <>
             <AindaNada>Nenhum hábito concluído ainda</AindaNada>
@@ -37,7 +27,7 @@ console.log({razao})
         )
     } else {
         return (
-            <Parabens>{razao}% de hábitos concluidos hoje!</Parabens>
+            <Parabens>{porcentagem}% de hábitos concluidos hoje!</Parabens>
         )
     }
 }

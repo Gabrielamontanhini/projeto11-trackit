@@ -58,9 +58,19 @@ export default function Habitos({ token }) {
         setHabitoNome("")
     }
 
+
+
     function habitar(e) {
         e.preventDefault()
         setNaoClicavel(true)
+        if ({habitoNome} === ""){
+            alert("Preencha o nome do hábito!")
+            setHabitoNome("")
+            setDiasHabito([])
+            setDisplay("none")
+            setNaoClicavel(false)
+            return
+        } else {
         const config = { headers: { Authorization: `Bearer ${token}` } }
         let body = {
             "name": habitoNome,
@@ -79,7 +89,7 @@ export default function Habitos({ token }) {
         setDiasHabito([])
         setDisplay("none")
         setNaoClicavel(false)
-    }
+    }}
 
     return (
         <>
@@ -89,11 +99,11 @@ export default function Habitos({ token }) {
                     <p>
                         Meus Hábitos
                     </p>
-                    <div data-test="habit-create-btn" onClick={novoHabito}>
+                    <button data-test="habit-create-btn"  disabled={naoClicavel} onClick={novoHabito}>
                         <h3>
                             +
                         </h3>
-                    </div>
+                    </button>
                 </AdicionarHabito>
                 <form onSubmit={habitar}>
                     <ConfigHabito
@@ -104,6 +114,7 @@ export default function Habitos({ token }) {
                             data-test="habit-name-input"
                             type="text"
                             disabled={naoClicavel}
+                            required
                             placeholder=" Nome do hábito"
                             value={habitoNome}
                             onChange={e => setHabitoNome(e.target.value)}
@@ -180,7 +191,7 @@ p{
 font-size: 22.976px;
 color: #126BA5;
 }
-div{
+button{
     width: 40px;
 height: 35px;
 background: #52B6FF;
