@@ -125,7 +125,7 @@ export default function Hoje({ token }) {
                                     {h.name}
                                 </h1>
                                 <h3 data-test="today-habit-sequence">Sequência atual:<Sequencia feito={h.done}> {h.currentSequence} dia(s)</Sequencia></h3>
-                                <h3 data-test="today-habit-record">Seu recorde:<Sequencia feito={(h.currentSequence) <= (h.highestSequence) && (h.highestSequence !== 0) ? true : false} > {h.highestSequence} dia(s)</Sequencia> </h3>
+                                <h3 data-test="today-habit-record">Seu recorde:<Sequencia feito={((h.currentSequence) <= (h.highestSequence) && (h.highestSequence !== 0)) ? true : false} > {h.highestSequence} dia(s)</Sequencia> </h3>
                             </div>
                             <CaixaCheck
                                 data-test="today-habit-check-btn"
