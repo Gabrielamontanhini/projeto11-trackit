@@ -11,25 +11,25 @@ import { HabitosContext } from "./contexts/HabitosContext";
 
 
 function App() {
-  const [user, setUser]= useState([])
+  const [user, setUser] = useState([])
 
   const [habitosTotais, setHabitosTotais] = useState([])
-  const [token, setToken]=useState("")
+  const [token, setToken] = useState("")
 
   return (
     <div>
-      <UserContext.Provider value={{user}}>
-        <HabitosContext.Provider value={{habitosTotais, setHabitosTotais}}>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<TelaInicial setToken={setToken}/>} />
-          <Route path="/cadastro" element={<TelaCadastro setUser={setUser} />} />
-          <Route path="/hoje" element={<Hoje />} />
-          <Route path="/habitos" element={<Habitos token={token}/>} />
-          <Route path="/historico" element={<Historico />} />
-        </Routes>
-      </BrowserRouter>
-      </HabitosContext.Provider>
+      <UserContext.Provider value={{ user }}>
+        <HabitosContext.Provider value={{ habitosTotais, setHabitosTotais }}>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<TelaInicial setToken={setToken} />} />
+              <Route path="/cadastro" element={<TelaCadastro setUser={setUser} />} />
+              <Route path="/hoje" element={<Hoje />} />
+              <Route path="/habitos" element={<Habitos token={token} />} />
+              <Route path="/historico" element={<Historico />} />
+            </Routes>
+          </BrowserRouter>
+        </HabitosContext.Provider>
       </UserContext.Provider>
     </div>
   );

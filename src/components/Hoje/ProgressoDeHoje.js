@@ -1,6 +1,34 @@
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components"
+import { HabitosContext } from "../../contexts/HabitosContext";
+import Habitos from "../Habitos/Habitos";
 
 export default function ProgressoDeHoje(props){
+
+    const { habitosTotais } = useContext(HabitosContext);
+
+
+
+const [razao, setRazao]=useState(0)
+
+
+
+useEffect(()=>{
+    let a = habitosTotais.length
+    let b = props.feito.length
+    let porcentagem = (b/a)*100
+    setRazao(porcentagem)
+    console.log({razao})
+}, [props.feito])
+
+
+function Dizai(){
+let a = habitosTotais.length
+let b = props.feito.length
+let porcentagem = (b/a)*100
+setRazao(porcentagem)
+console.log({razao})
+}
     if (props.feito.length === 0){
         return (
             <>
@@ -9,7 +37,7 @@ export default function ProgressoDeHoje(props){
         )
     } else {
         return (
-            <Parabens>Parabéns você fez algo!</Parabens>
+            <Parabens>{razao}% de hábitos concluidos hoje!</Parabens>
         )
     }
 }
