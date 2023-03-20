@@ -11,7 +11,10 @@ export default function ProgressoDeHoje(props){
 
 const [porcentagem, setPorcentagem]=useState()
 
-
+function mostraErro(){
+    console.log(props)
+    console.log(porcentagem)
+}
 
 useEffect(()=>{
     setPorcentagem(props.progresso)
@@ -19,15 +22,21 @@ useEffect(()=>{
 
 
 
-    if (props.progresso === 0 || porcentagem === NaN){
+    if (props.progresso === "0"){
         return (
             <>
             <AindaNada data-test="today-counter">Nenhum hábito concluído ainda</AindaNada>
             </>
         )
-    } else {
+    } else  if (props.progresso === "NaN"){
         return (
-            <Parabens data-test="today-counter">{porcentagem}% de hábitos concluidos hoje!</Parabens>
+            <>
+            <AindaNada data-test="today-counter">Nenhum hábito concluído ainda</AindaNada>
+            </>
+        )
+    } else{
+        return (
+            <Parabens data-test="today-counter" onClick={mostraErro}>{porcentagem}% de hábitos concluidos hoje!  </Parabens>
         )
     }
 }

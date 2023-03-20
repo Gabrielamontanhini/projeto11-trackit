@@ -19,36 +19,36 @@ export default function Hoje({ token }) {
     const [mes, setMes] = useState(0)
     const [habitosDeHoje, setHabitosDeHoje] = useState([])
     const config = { headers: { Authorization: `Bearer ${token}` } }
-const [razao, setRazao]=useState(0)
+    const [razao, setRazao] = useState(0)
 
 
 
 
     function fazerEste(id, done, h) {
-        if (!concluidos.includes(h)){
-    let feito = done
-console.log(h)
-    const concluir = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`,
-    {},
-    config)
+        if (!concluidos.includes(h)) {
+            let feito = done
+            console.log(h)
+            const concluir = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`,
+                {},
+                config)
 
-    concluir.then((res)=>{
-        setConcluidos([...concluidos, h])
-    })
-    concluir.catch((err)=>{
-        console.log(err.response.data.message)
-    })
-        } else if (concluidos.includes(h)){
+            concluir.then((res) => {
+                setConcluidos([...concluidos, h])
+            })
+            concluir.catch((err) => {
+                console.log(err.response.data.message)
+            })
+        } else if (concluidos.includes(h)) {
             const desfazer = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`,
-            {},
-            config)
+                {},
+                config)
 
-            desfazer.then((res)=>{
+            desfazer.then((res) => {
                 let novosConcluidos = concluidos.filter(h => h.id !== id)
                 setConcluidos(novosConcluidos)
             })
 
-            desfazer.catch((err)=>{
+            desfazer.catch((err) => {
                 alert(err.response.data.message)
             })
         }
@@ -58,12 +58,16 @@ console.log(h)
     useEffect(() => {
         const busca = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config)
         busca.then((res) => {
-            
+
             setHabitosDeHoje(res.data)
-          let arrayDeFeitos = (res.data).filter(h => h.done !== false)
-          setConcluidos(arrayDeFeitos)
-          let porcentagem = ((arrayDeFeitos.length/res.data.length)*100).toFixed(0)
-          setRazao(porcentagem)
+            let arrayDeFeitos = (res.data).filter(h => h.done !== false)
+            setConcluidos(arrayDeFeitos)
+            let porcentagem = ((arrayDeFeitos.length / res.data.length) * 100).toFixed(0)
+            if (porcentagem === NaN || porcentagem === 0) {
+                setRazao(null)
+            } else {
+                setRazao(porcentagem)
+            }
         })
         busca.catch((err) => {
             console.log(err.response.data.message)
@@ -90,7 +94,7 @@ console.log(h)
         setNumero(c)
 
 
-       
+
     }, [concluidos])
 
 
@@ -118,10 +122,10 @@ console.log(h)
                         >
                             <div>
                                 <h1 data-test="today-habit-name">
-                                    {h.name} de id: {h.id}
+                                    {h.name}
                                 </h1>
                                 <h3>Sequência atual:<Sequencia feito={h.done}> {h.currentSequence} dia(s)</Sequencia></h3>
-                                <h3>Seu recorde:<Sequencia feito={(h.currentSequence)<=(h.highestSequence)&&(h.highestSequence !== 0) ? true : false} > {h.highestSequence} dia(s)</Sequencia> </h3>
+                                <h3>Seu recorde:<Sequencia feito={(h.currentSequence) <= (h.highestSequence) && (h.highestSequence !== 0) ? true : false} > {h.highestSequence} dia(s)</Sequencia> </h3>
                             </div>
                             <CaixaCheck
                                 data-test="today-habit-check-btn"
@@ -138,14 +142,14 @@ console.log(h)
 }
 
 
-const Sequencia = styled.strong `
+const Sequencia = styled.strong`
 color: ${props => {
-    if (props.feito=== true){
-        return "#8FC549";
-    } else {
-        return "#666666"
-    }
-}};
+        if (props.feito === true) {
+            return "#8FC549";
+        } else {
+            return "#666666"
+        }
+    }};
 `
 
 const CaixaCheck = styled.div`
