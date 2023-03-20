@@ -5,7 +5,7 @@ import dayjs from "dayjs"
 
 export default function Rodape(){
 function teste(){
-    console.log(dayjs().day())
+    console.log(dayjs().date())
 }
 
     return (

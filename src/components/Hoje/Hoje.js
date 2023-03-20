@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import Cabesalho from "../Cabesalho";
 import check from "../../assets/check.svg"
@@ -13,13 +13,39 @@ export default function Hoje() {
     const [concluidos, setConcluidos] = useState([])
 const { habitosTotais } = useContext(HabitosContext);
 
+const [dia, setDia]=useState("")
+const [numero, setNumero]=useState(0)
+const [mes, setMes]=useState(0)
+
     function fazerEste(este) {
         if (concluidos.includes(este)){
             setConcluidos([...concluidos])
         } else if (!concluidos.includes(este)){
         setConcluidos([...concluidos, este])}
     }
+useEffect(()=>{
 
+    let a = dayjs().day()
+    if (a = 1){
+        setDia("Segunda-feira")
+    } else if ( a = 0){
+        setDia("Domingo")
+    }else if ( a = 2){
+        setDia("Terça-feira")
+    }else if ( a = 3){
+        setDia("Quarta-feira")
+    }else if ( a = 4){
+        setDia("Quinta-feira")
+    }else if ( a = 5){
+        setDia("Sexta-feira")
+    }else if ( a = 6){
+        setDia("Sábado")
+    }
+    let b = dayjs().month()
+    setMes(b+1)
+    let c = dayjs().date()
+    setNumero(c)
+}, [])
 
 
     return (
@@ -27,7 +53,7 @@ const { habitosTotais } = useContext(HabitosContext);
             <ContainerHoje>
                 <Cabesalho data-test="header" />
                 <Dia>
-                    <h2 data-test="today">{dayjs().month()}</h2>
+                    <h2 data-test="today">{dia}, {numero}/{mes}</h2>
                     <ProgressoDeHoje 
                     data-test="today-counter" 
                     feito={concluidos} 
