@@ -44,6 +44,7 @@ login.catch((erro)=> {
     alert(erro.response.data.message)
     setEmail("")
     setPassword("")
+    setNaoClicavel(false)
 })
 }
 
