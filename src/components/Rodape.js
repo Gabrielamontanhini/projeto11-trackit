@@ -5,12 +5,12 @@ import elipse from "../assets/elipse.svg"
 export default function Rodape(){
     return (
         <>
-        <RodapeEstilizado>
+        <RodapeEstilizado  data-test="menu">
             <Link to="/habitos" data-test="habit-link" >
                 <p>Hábitos</p>
             </Link>
-            <Link to="/hoje">
-                <Bolinha data-test="today-link">
+            <Link to="/hoje" data-test="today-link"> 
+                <Bolinha >
                     <img src={elipse}/>
                     <h1>
                         Hoje
