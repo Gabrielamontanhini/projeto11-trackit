@@ -8,14 +8,16 @@ import { HabitosContext } from "../../contexts/HabitosContext";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import SEMANA from "../../semana";
+import axios from "axios";
 
-export default function Hoje() {
+export default function Hoje({token}) {
     const [concluidos, setConcluidos] = useState([])
 const { habitosTotais } = useContext(HabitosContext);
 
 const [dia, setDia]=useState("")
 const [numero, setNumero]=useState(0)
 const [mes, setMes]=useState(0)
+const [habitosDeHoje, setHabitosDeHoje]=useState([])
 
     function fazerEste(este) {
         if (concluidos.includes(este)){
@@ -23,7 +25,23 @@ const [mes, setMes]=useState(0)
         } else if (!concluidos.includes(este)){
         setConcluidos([...concluidos, este])}
     }
+
+
 useEffect(()=>{
+
+    const config = { headers: { Authorization: `Bearer ${token}` } }
+
+    const busca = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config)
+
+    
+busca.then((res)=>{
+    console.log(res)
+    setHabitosDeHoje(res.data)
+})
+
+busca.catch((err)=>{
+    console.log(err.response.data.message)
+})
 
     let a = dayjs().day()
     if (a = 1){
@@ -60,23 +78,23 @@ useEffect(()=>{
                     />
                 </Dia>
                 <ContainerHabitos>
-                    {habitosTotais.map((h) =>
+                    {habitosDeHoje.map((h) =>
                         <Habito 
                         data-test="today-habit-container"  
                         onClick={()=>fazerEste(h.name)}
                         >
                             <div>
-                                <p data-test="today-habit-name">
+                                <h1 data-test="today-habit-name">
                                     {h.name}
-                                </p>
-                                <Semana>
-                                {SEMANA.map((d, i) => <Diaa key={d.i} estado={h.days.includes(i) ? "pego" : "nn"}><h1>{d.dia}</h1></Diaa>)}
-                                </Semana>
+                                </h1>
+                                <h3>Sequência atual: {h.currentSequence}</h3>
+                                <h3>Seu recorde: {h.highestSequence}</h3>
                             </div>
                             <CaixaCheck 
                             data-test="today-habit-check-btn"
                             estado={concluidos.includes(h.name) ? "feito" : "ainda"}
-                            ><img src={check} />
+                            >
+                                <img src={check} />
                             </CaixaCheck>
                         </Habito>)}
                 </ContainerHabitos>
@@ -145,17 +163,24 @@ height: 90%;
 const Habito = styled.div`
 display: flex;
 flex-direction: row;
+justify-content: space-between;
 width: 340px;
 height: 91px;
 background: #FFFFFF;
 border-radius: 5px;
 margin-top: 10px;
-p{
+h1{
+    font-size: 19px;
     margin-left: 15px;
     margin-bottom: 8px;
     margin-top: 15px;
     color: #666666;
     }
+h3{
+    font-size: 13px;
+    margin-left: 15px;
+    color: #666666;
+}
 `
 const Semana = styled.div`
 

@@ -2,10 +2,15 @@ import { Link } from "react-router-dom"
 import styled from "styled-components"
 import elipse from "../assets/elipse.svg"
 import dayjs from "dayjs"
+import { useContext } from "react"
+import { HabitosContext } from "../contexts/HabitosContext"
 
 export default function Rodape(){
+
+    
+    const { habitosTotais } = useContext(HabitosContext);
 function teste(){
-    console.log(dayjs().date())
+    console.log(habitosTotais)
 }
 
     return (

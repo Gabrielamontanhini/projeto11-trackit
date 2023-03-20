@@ -24,7 +24,7 @@ function App() {
             <Routes>
               <Route path="/" element={<TelaInicial setToken={setToken} />} />
               <Route path="/cadastro" element={<TelaCadastro setUser={setUser} />} />
-              <Route path="/hoje" element={<Hoje />} />
+              <Route path="/hoje" element={<Hoje token={token} />} />
               <Route path="/habitos" element={<Habitos token={token} />} />
               <Route path="/historico" element={<Historico />} />
             </Routes>
