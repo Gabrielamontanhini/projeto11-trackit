@@ -44,16 +44,36 @@ setUser(body)
         <ContainerInicial>
             <img src={logo} />
             <form onSubmit={fazerCadastro}>
-                <input data-test="email-input" type="email" placeholder="email" value={email} onChange={e => setEmail(e.target.value)}
+                <input 
+                data-test="email-input" 
+                type="email" 
+                placeholder="email" 
+                value={email} 
+                onChange={e => setEmail(e.target.value)}
                     pattern="^\w+([.-]?\w+)@\w+([.-]?\w+)(\.\w{2,})+$"
                     title="Precisa ser um email valido. Exemplo (nome@dominio.com)"
-                    required></input>
-                <input data-test="password-input" type="password" placeholder="senha" value={password} onChange={e => setPassword(e.target.value)} required></input>
-                <input data-test="user-name-input" type="text" placeholder="nome" value={name} onChange={e => setName(e.target.value)} required></input>
-                <input data-test="user-image-input" type="url" placeholder="foto" value={image} onChange={e => setImage(e.target.value)}
-                    //pattern="^(?:(?:https?|ftp):\/\/)?(?:www\.)?[a-z0-9]+(?:[\-\.][a-z0-9]+)\.[a-z]{2,6}(?:\/.)?$"
-                    // title="Precisa ser um link de uma imagem válido"
-                    required></input>
+                required/>
+                <input 
+                data-test="password-input" 
+                type="password" 
+                placeholder="senha" 
+                value={password} 
+                onChange={e => setPassword(e.target.value)} 
+                required/>
+                <input 
+                data-test="user-name-input" 
+                type="text" 
+                placeholder="nome" 
+                value={name} 
+                onChange={e => setName(e.target.value)} 
+                required/>
+                <input 
+                data-test="user-image-input" 
+                type="url" 
+                placeholder="foto" 
+                value={image} 
+                onChange={e => setImage(e.target.value)}
+                required/>
 
                 <button data-test="signup-btn" type="submit">
                     <h4>

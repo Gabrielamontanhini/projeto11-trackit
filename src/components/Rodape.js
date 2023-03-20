@@ -6,18 +6,18 @@ export default function Rodape(){
     return (
         <>
         <RodapeEstilizado>
-            <Link to="/habitos">
+            <Link to="/habitos" data-test="habit-link" >
                 <p>Hábitos</p>
             </Link>
             <Link to="/hoje">
-                <Bolinha>
+                <Bolinha data-test="today-link">
                     <img src={elipse}/>
                     <h1>
                         Hoje
                     </h1>
                 </Bolinha>
             </Link>
-            <Link to="/historico">
+            <Link to="/historico" data-test="history-link" >
                 <p>
                     Histórico
                 </p>

@@ -90,6 +90,7 @@ const {habitosTotais, setHabitosTotais} = useContext(HabitosContext)
                         display={display}
                     >
                         <input
+                            data-test="habit-name-input"
                             type="text"
                             placeholder=" Nome do hábito"
                             value={habitoNome}
@@ -98,6 +99,7 @@ const {habitosTotais, setHabitosTotais} = useContext(HabitosContext)
                         <Semana>
 
                             {SEMANA.map((d, i)=> <Day 
+                            data-test="habit-day"
                             key={d.i} 
                             i={i} 
                             dia={d.dia} 
@@ -111,8 +113,8 @@ const {habitosTotais, setHabitosTotais} = useContext(HabitosContext)
                             <p data-test="habit-create-cancel-btn" onClick={cancelarNovoHabito}>
                                 Cancelar
                             </p>
-                            <button type="submit" data-test="habit-create-save-btn">
-                                Salvar
+                            <button data-test="habit-create-save-btn" type="submit" >
+                               <h4> Salvar</h4>
                             </button>
                         </Comandos>
                     </ConfigHabito> 
@@ -121,6 +123,11 @@ const {habitosTotais, setHabitosTotais} = useContext(HabitosContext)
 
 
                 <CorpoHabitos habitosTotais={habitosTotais} token={token} setHabitosTotais={setHabitosTotais}/>
+
+
+
+
+                
                 <Rodape data-test="menu" />
             </ContainerHabitos>
         </>
@@ -225,6 +232,13 @@ font-weight: 400;
 font-size: 15.976px;
 color: #52B6FF;
 margin-right: 23px;
+    }
+    h4{
+        font-family: 'Lexend Deca';
+font-style: normal;
+font-weight: 400;
+font-size: 15.976px;
+line-height: 20px;
     }
 `
 

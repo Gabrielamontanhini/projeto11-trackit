@@ -34,15 +34,30 @@ export default function CorpoHabitos({ habitosTotais, token, setHabitosTotais })
             <>
                 <ContainerHabitos>
                     {habitosTotais.map((h) =>
-                        <Habito key={h.id} data-test="habit-container" >
-                            <p data-test="habit-name">
-                                {h.name} </p>
+                        <Habito key={h.id} 
+                        data-test="habit-container" 
+                        >
+                            <p 
+                            data-test="habit-name"
+                            >
+                                {h.name} 
+                            </p>
                             <Semana>
 
-                                {SEMANA.map((d, i) => <Diaa key={d.i} estado={h.days.includes(i) ? "pego" : "nn"}><h1>{d.dia}</h1></Diaa>)}
+                                {SEMANA.map((d, i) => <Diaa key={d.i} 
+                                data-test="habit-day"
+                                estado={h.days.includes(i) ? "pego" : "nn"}
+                                >
+                                    <h1>
+                                        {d.dia}
+                                    </h1>
+                                </Diaa>)}
 
                             </Semana>
-                            <img src={lixo} data-test="habit-delete-btn" onClick={() => deletar(h.id)} />
+                            <img src={lixo} 
+                            data-test="habit-delete-btn" 
+                            onClick={() => deletar(h.id)} 
+                            />
                         </Habito>)}
                 </ContainerHabitos>
             </>

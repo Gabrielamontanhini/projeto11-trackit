@@ -25,18 +25,30 @@ const { habitosTotais } = useContext(HabitosContext);
                 <Cabesalho data-test="header" />
                 <Dia>
                     <h2 data-test="today">{/*dayjs.utc().local().format()*/}</h2>
-                    <ProgressoDeHoje data-test="today-counter" feito={concluidos} />
+                    <ProgressoDeHoje 
+                    data-test="today-counter" 
+                    feito={concluidos} 
+                    />
                 </Dia>
                 <ContainerHabitos>
                     {habitosTotais.map((h) =>
-                        <Habito data-test="today-habit-container"  onClick={()=>fazerEste(h.name)}>
+                        <Habito 
+                        data-test="today-habit-container"  
+                        onClick={()=>fazerEste(h.name)}
+                        >
                             <div>
-                                <p>{h.name}</p>
+                                <p data-test="today-habit-name">
+                                    {h.name}
+                                </p>
                                 <Semana>
                                 {SEMANA.map((d, i) => <Diaa key={d.i} estado={h.days.includes(i) ? "pego" : "nn"}><h1>{d.dia}</h1></Diaa>)}
                                 </Semana>
                             </div>
-                            <CaixaCheck estado={concluidos.includes(h.name) ? "feito" : "ainda"}><img src={check} /></CaixaCheck>
+                            <CaixaCheck 
+                            data-test="today-habit-check-btn"
+                            estado={concluidos.includes(h.name) ? "feito" : "ainda"}
+                            ><img src={check} />
+                            </CaixaCheck>
                         </Habito>)}
                 </ContainerHabitos>
                 <Rodape data-test="menu" />
