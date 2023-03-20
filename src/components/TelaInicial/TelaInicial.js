@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../../assets/logo-completa.svg"
+import { ThreeDots } from 'react-loader-spinner'
+import Entrar from "./Entrar";
 
 
 
@@ -10,7 +12,8 @@ export default function TelaInicial({setToken}) {
 const navigate = useNavigate()
 const [email, setEmail]=useState("")
 const [password, setPassword]=useState("")
-
+const [naoClicavel, setNaoClicavel]=useState(false)
+const [entrar, setEntrar]=useState(true)
 
 
 const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login"
@@ -18,6 +21,8 @@ const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/log
 
 function fazerLogin(e){
 e.preventDefault()
+setNaoClicavel(true)
+setEntrar(false)
 let body = {
     "email": email,
     "password": password
@@ -31,6 +36,8 @@ login.then((res)=>{
     console.log(res.data)
     setToken(res.data.token)
     navigate("/hoje")
+    setNaoClicavel(false)
+    setEntrar(true)
 })
 
 login.catch((erro)=> {
@@ -45,6 +52,7 @@ login.catch((erro)=> {
                     <form onSubmit={fazerLogin}>
                         <input 
                         data-test="email-input"
+                        disabled={naoClicavel} 
                         type="email"
                         placeholder="email" 
                         value={email} 
@@ -57,13 +65,15 @@ login.catch((erro)=> {
                         data-test="password-input" 
                         type="password" 
                         placeholder="senha" 
+                        disabled={naoClicavel} 
                         value={password} 
                         onChange={e => setPassword(e.target.value)} 
                         required/>
-                            <button data-test="login-btn" type="submit">
-                                <h4>
-                                    Entrar
-                                </h4>
+                            <button
+                            disabled={naoClicavel} 
+                            data-test="login-btn" 
+                            type="submit">
+                                <Entrar entrar={entrar}/>
                             </button> 
                         <Link to="/cadastro" data-test="signup-link">
                             <p>
@@ -116,13 +126,5 @@ p{
     text-decoration-line: underline;
     margin-top: 25px;
 }
-h4{
-    font-family: 'Lexend Deca';
-font-style: normal;
-font-weight: 400;
-font-size: 20.976px;
-line-height: 26px;
-text-align: center;
-color: #FFFFFF;
-}
+
 `

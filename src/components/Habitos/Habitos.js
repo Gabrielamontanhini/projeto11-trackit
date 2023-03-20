@@ -10,21 +10,20 @@ import SEMANA from "../../semana";
 
 
 export default function Habitos({ token }) {
-const {habitosTotais, setHabitosTotais} = useContext(HabitosContext)
-    
+    const { habitosTotais, setHabitosTotais } = useContext(HabitosContext)
+
     const [display, setDisplay] = useState("none")
     const [habitoNome, setHabitoNome] = useState("")
     const [diasHabito, setDiasHabito] = useState([])
 
-    //const semana = [{id: 0, dia: "D"}, {id: 1, dia: "S"},{id: 2, dia: "T"},{id: 3, dia: "Q"},{id: 4, dia: "Q"},{id: 5, dia: "S"},{id: 6, dia: "S"}]
 
-
+    
     useEffect(() => {
-        const config = {   headers: {   Authorization: `Bearer ${token}` }   }
+        const config = { headers: { Authorization: `Bearer ${token}` } }
 
-        const promise = axios.get( "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config )
+        const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config)
 
-        promise.then((res) => {          
+        promise.then((res) => {
             setHabitosTotais(res.data)
         })
 
@@ -52,13 +51,13 @@ const {habitosTotais, setHabitosTotais} = useContext(HabitosContext)
 
     function habitar(e) {
         e.preventDefault()
-        const config = { headers: {  Authorization: `Bearer ${token}`  }   }
+        const config = { headers: { Authorization: `Bearer ${token}` } }
         let body = {
             "name": habitoNome,
             "days": diasHabito
         }
         setHabitosTotais([...habitosTotais, body])
-        const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body , config)
+        const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body, config)
 
         promise.then((res) => {
             console.log("deu certo")
@@ -98,36 +97,36 @@ const {habitosTotais, setHabitosTotais} = useContext(HabitosContext)
                         />
                         <Semana>
 
-                            {SEMANA.map((d, i)=> <Day 
-                            data-test="habit-day"
-                            key={d.i} 
-                            i={i} 
-                            dia={d.dia} 
-                            function={()=>adicionarDia(i)} 
-                            estado={diasHabito.includes(i) ? "pego" : "nn"} 
-                            onClick={()=> adicionarDia(i)}>
+                            {SEMANA.map((d, i) => <Day
+                                data-test="habit-day"
+                                key={d.i}
+                                i={i}
+                                dia={d.dia}
+                                function={() => adicionarDia(i)}
+                                estado={diasHabito.includes(i) ? "pego" : "nn"}
+                                onClick={() => adicionarDia(i)}>
                                 <h1>{d.dia}</h1>
-                                </Day>)}
+                            </Day>)}
                         </Semana>
                         <Comandos>
                             <p data-test="habit-create-cancel-btn" onClick={cancelarNovoHabito}>
                                 Cancelar
                             </p>
                             <button data-test="habit-create-save-btn" type="submit" >
-                               <h4> Salvar</h4>
+                                <h4> Salvar</h4>
                             </button>
                         </Comandos>
-                    </ConfigHabito> 
+                    </ConfigHabito>
                 </form>
 
 
 
-                <CorpoHabitos habitosTotais={habitosTotais} token={token} setHabitosTotais={setHabitosTotais}/>
+                <CorpoHabitos habitosTotais={habitosTotais} token={token} setHabitosTotais={setHabitosTotais} />
 
 
 
 
-                
+
                 <Rodape data-test="menu" />
             </ContainerHabitos>
         </>
@@ -261,20 +260,20 @@ justify-content: center;
 margin-right: 4px;
 color: #DBDBDB;
 background-color: ${props => {
-    if (props.estado === "pego"){
-        return "#CFCFCF"
-    } else if (props.estado === "nn"){
-        return "white"
-    } 
-}};
+        if (props.estado === "pego") {
+            return "#CFCFCF"
+        } else if (props.estado === "nn") {
+            return "white"
+        }
+    }};
 & h1{
     font-weight: 600;
     color: ${props => {
-    if (props.estado === "pego"){
-        return "white"
-    } else if (props.estado === "nn"){
-        return "#DBDBDB"
-    } 
-}};
+        if (props.estado === "pego") {
+            return "white"
+        } else if (props.estado === "nn") {
+            return "#DBDBDB"
+        }
+    }};
 }
 `

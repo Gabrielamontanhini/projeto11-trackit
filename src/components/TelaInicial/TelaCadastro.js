@@ -3,6 +3,7 @@ import { useState } from "react"
 import { Link, Navigate, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import logo from "../../assets/logo-completa.svg"
+import { ThreeDots } from 'react-loader-spinner'
 
 export default function TelaCadastro({setUser}) {
     const Navigate = useNavigate()
@@ -11,6 +12,8 @@ export default function TelaCadastro({setUser}) {
     const [password, setPassword] = useState("")
     const [name, setName] = useState("")
     const [image, setImage] = useState("")
+    const [cadastrar, setCadastrar]=useState("Cadastrar")
+    const [naoClicavel, setNaoClicavel]=useState(false)
 
 
     const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up"
@@ -23,6 +26,8 @@ export default function TelaCadastro({setUser}) {
 
     function fazerCadastro(e) {
         e.preventDefault()
+        setCadastrar("Cadastrando")
+        setNaoClicavel(true)
 
         const cadastro = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", body)
         console.log(body)
@@ -31,10 +36,13 @@ export default function TelaCadastro({setUser}) {
             console.log(res.data)
 setUser(body)
             Navigate("/")
+            setCadastrar("Cadastrar")
+            setNaoClicavel(false)
         })
         cadastro.catch((erro) => {
             alert(erro.response.data.message)
             console.log(erro.response.data.message)
+            setNaoClicavel(false)
         }
         )
     }
@@ -48,36 +56,46 @@ setUser(body)
                 data-test="email-input" 
                 type="email" 
                 placeholder="email" 
+                disabled={naoClicavel} 
                 value={email} 
                 onChange={e => setEmail(e.target.value)}
                     pattern="^\w+([.-]?\w+)@\w+([.-]?\w+)(\.\w{2,})+$"
                     title="Precisa ser um email valido. Exemplo (nome@dominio.com)"
                 required/>
+                
                 <input 
                 data-test="password-input" 
                 type="password" 
                 placeholder="senha" 
+                disabled={naoClicavel} 
                 value={password} 
                 onChange={e => setPassword(e.target.value)} 
                 required/>
+
                 <input 
                 data-test="user-name-input" 
                 type="text" 
                 placeholder="nome" 
+                disabled={naoClicavel} 
                 value={name} 
                 onChange={e => setName(e.target.value)} 
                 required/>
+
                 <input 
                 data-test="user-image-input" 
+                disabled={naoClicavel} 
                 type="url" 
                 placeholder="foto" 
                 value={image} 
                 onChange={e => setImage(e.target.value)}
                 required/>
 
-                <button data-test="signup-btn" type="submit">
+                <button 
+                data-test="signup-btn" 
+                type="submit"
+                disabled={naoClicavel} >
                     <h4>
-                        Cadastrar
+                        {cadastrar}
                     </h4>
                 </button>
 
