@@ -14,7 +14,10 @@ export default function Hoje() {
 const { habitosTotais } = useContext(HabitosContext);
 
     function fazerEste(este) {
-        setConcluidos([...concluidos, este])
+        if (concluidos.includes(este)){
+            setConcluidos([...concluidos])
+        } else if (!concluidos.includes(este)){
+        setConcluidos([...concluidos, este])}
     }
 
 
