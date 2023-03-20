@@ -91,7 +91,7 @@ export default function Habitos({ token }) {
     }}
 
 
-    
+
     return (
         <>
             <ContainerHabitos>
@@ -108,13 +108,13 @@ export default function Habitos({ token }) {
                 </AdicionarHabito>
                 <form onSubmit={habitar}>
                     <ConfigHabito
-                        data-test="habit-create-container"
+                        data-test="habit-create-container" //o hub nao acha esse container
                         display={display}
                     >
                         <input
                             data-test="habit-name-input"
                             type="text"
-                            disabled={naoClicavel}
+                            disabled={naoClicavel} //ai ele nao percebe que esses disableds ocorrem 
                             required
                             placeholder=" Nome do hábito"
                             value={habitoNome}

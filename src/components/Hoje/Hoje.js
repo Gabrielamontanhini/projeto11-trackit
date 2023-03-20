@@ -233,20 +233,3 @@ width: 65%;
 justify-self: flex-start;
 margin-left: 18px;
 `
-
-
-
-/*  const habito = id;
-        if (concluidos.includes(habito)) {
-            let novoArray = concluidos.filter(n => n !== habito)
-            setConcluidos(novoArray)
-        } else if (!concluidos.includes(habito)) {
-            const concluir = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habito}/check`, {},  config)
-            concluir.then((res) => {
-                console.log(res.data)
-            })
-            concluir.catch((err) => {
-                alert(err.response.data.message)
-            })
-            setConcluidos([...concluidos, habito])
-        }*/
