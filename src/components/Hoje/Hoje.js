@@ -7,13 +7,14 @@ import Rodape from "../Rodape";
 import { HabitosContext } from "../../contexts/HabitosContext";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
+import SEMANA from "../../semana";
 
 export default function Hoje() {
-    const [concluidos, setConcluidos] = useState(0)
+    const [concluidos, setConcluidos] = useState([])
 const { habitosTotais } = useContext(HabitosContext);
 
-    function fazerEste() {
-        setConcluidos(1)
+    function fazerEste(este) {
+        setConcluidos([...concluidos, este])
     }
 
 
@@ -28,14 +29,14 @@ const { habitosTotais } = useContext(HabitosContext);
                 </Dia>
                 <ContainerHabitos>
                     {habitosTotais.map((h) =>
-                        <Habito data-test="today-habit-container"  onClick={fazerEste}>
+                        <Habito data-test="today-habit-container"  onClick={()=>fazerEste(h.name)}>
                             <div>
                                 <p>{h.name}</p>
                                 <Semana>
-                                    <div>D</div> <div>S</div> <div>T</div> <div>Q</div> <div>Q</div> <div>S</div> <div>S</div>
+                                {SEMANA.map((d, i) => <Diaa key={d.i} estado={h.days.includes(i) ? "pego" : "nn"}><h1>{d.dia}</h1></Diaa>)}
                                 </Semana>
                             </div>
-                            <CaixaCheck><img src={check} /></CaixaCheck>
+                            <CaixaCheck estado={concluidos.includes(h.name) ? "feito" : "ainda"}><img src={check} /></CaixaCheck>
                         </Habito>)}
                 </ContainerHabitos>
                 <Rodape data-test="menu" />
@@ -53,7 +54,12 @@ margin-top: 13px;
 margin-right: 13px;
 width: 69px;
 height: 69px;
-background: #EBEBEB;
+background:${props=>{
+if (props.estado === "ainda"){
+    return "#EBEBEB"
+} else {
+    return "#8FC549"
+} }} ;
 border: 1px solid #E7E7E7;
 border-radius: 5px;
 `
@@ -116,8 +122,10 @@ display: flex;
 width: 65%;
 justify-self: flex-start;
 margin-left: 18px;
-div{
-    width: 30px;
+
+`
+const Diaa = styled.div` 
+ width: 30px;
     height: 30px;
     border: 1px solid #D5D5D5;
 border-radius: 5px;
@@ -125,5 +133,21 @@ display: flex;
 align-items: center;
 justify-content: center;
 margin-right: 4px;
+background-color: ${props => {
+        if (props.estado === "pego") {
+            return "#CFCFCF"
+        } else {
+            return "white"
+        }
+    }};
+& h1{
+    font-weight: 600;
+    color: ${props => {
+        if (props.estado === "pego") {
+            return "white"
+        } else if (props.estado === "nn") {
+            return "#DBDBDB"
+        }
+    }};
 }
 `

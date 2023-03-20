@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export default function ProgressoDeHoje(props){
-    if (props.feito === 0){
+    if (props.feito.length === 0){
         return (
             <>
             <AindaNada>Nenhum hábito concluído ainda</AindaNada>
