@@ -11,7 +11,6 @@ import SEMANA from "../../semana";
 
 export default function Habitos({ token }) {
     const { habitosTotais, setHabitosTotais } = useContext(HabitosContext)
-
     const [display, setDisplay] = useState("none")
     const [habitoNome, setHabitoNome] = useState("")
     const [diasHabito, setDiasHabito] = useState([])
@@ -91,6 +90,8 @@ export default function Habitos({ token }) {
         setNaoClicavel(false)
     }}
 
+
+    
     return (
         <>
             <ContainerHabitos>

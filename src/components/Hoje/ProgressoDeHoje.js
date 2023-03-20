@@ -22,12 +22,12 @@ useEffect(()=>{
     if (props.progresso === 0){
         return (
             <>
-            <AindaNada>Nenhum hábito concluído ainda</AindaNada>
+            <AindaNada data-test="today-counter">Nenhum hábito concluído ainda</AindaNada>
             </>
         )
     } else {
         return (
-            <Parabens>{porcentagem}% de hábitos concluidos hoje!</Parabens>
+            <Parabens data-test="today-counter">{porcentagem}% de hábitos concluidos hoje!</Parabens>
         )
     }
 }

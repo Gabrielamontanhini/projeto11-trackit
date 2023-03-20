@@ -8,42 +8,42 @@ import { ProgressBar } from "react-loader-spinner"
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar"
 import "react-circular-progressbar/dist/styles.css"
 
-export default function Rodape(props){
+export default function Rodape(props) {
 
-    
+
     const { habitosTotais } = useContext(HabitosContext);
-function teste(){
-    console.log(habitosTotais)
-}
+    function teste() {
+        console.log(habitosTotais)
+    }
 
     return (
         <>
-        <RodapeEstilizado  data-test="menu">
-            <Link to="/habitos" data-test="habit-link" >
-                <p>Hábitos</p>
-            </Link>
-            <Link to="/hoje" data-test="today-link"> 
-                <Bolinha onClick={teste}>
-                <CircularProgressbar
-            value={props.porcentagem}
-            text={`Hoje`}
-            background
-            backgroundPadding={6}
-            styles={buildStyles({
-              backgroundColor: "#52B6FF",
-              textColor: "#ffffff",
-              pathColor: "#ffffff",
-              trailColor: "transparent",
-            })}
-          />
-                </Bolinha>
-            </Link>
-            <Link to="/historico" data-test="history-link" >
-                <p>
-                    Histórico
-                </p>
-            </Link>
-        </RodapeEstilizado>
+            <RodapeEstilizado data-test="menu">
+                <Link to="/habitos" data-test="habit-link" >
+                    <p>Hábitos</p>
+                </Link>
+                <Link to="/hoje" data-test="today-link">
+                    <Bolinha onClick={teste}>
+                        <CircularProgressbar
+                            value={props.porcentagem}
+                            text={`Hoje`}
+                            background
+                            backgroundPadding={6}
+                            styles={buildStyles({
+                                backgroundColor: "#52B6FF",
+                                textColor: "#ffffff",
+                                pathColor: "#ffffff",
+                                trailColor: "transparent",
+                            })}
+                        />
+                    </Bolinha>
+                </Link>
+                <Link to="/historico" data-test="history-link" >
+                    <p>
+                        Histórico
+                    </p>
+                </Link>
+            </RodapeEstilizado>
         </>
     )
 }
