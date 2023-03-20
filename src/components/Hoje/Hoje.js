@@ -22,35 +22,48 @@ export default function Hoje({ token }) {
 const [razao, setRazao]=useState(0)
 
 
-   
 
-    function fazerEste(id, done) {
+
+    function fazerEste(id, done, h) {
+        if (!concluidos.includes(h)){
     let feito = done
-
+console.log(h)
     const concluir = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`,
     {},
     config)
 
     concluir.then((res)=>{
-        console.log(res.data)
+        setConcluidos([...concluidos, h])
     })
     concluir.catch((err)=>{
         console.log(err.response.data.message)
     })
+        } else if (concluidos.includes(h)){
+            const desfazer = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`,
+            {},
+            config)
 
-    let a = habitosDeHoje.length
-    let arrayDeFeitos = habitosDeHoje.filter(h => h.done !== false)
-    setConcluidos(arrayDeFeitos)
-let result = ((arrayDeFeitos.length/a)*100).toFixed(0)
-setRazao(result)
+            desfazer.then((res)=>{
+                let novosConcluidos = concluidos.filter(h => h.id !== id)
+                setConcluidos(novosConcluidos)
+            })
+
+            desfazer.catch((err)=>{
+                alert(err.response.data.message)
+            })
+        }
     }
 
 
     useEffect(() => {
         const busca = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config)
         busca.then((res) => {
-            console.log(res)
+            
             setHabitosDeHoje(res.data)
+          let arrayDeFeitos = (res.data).filter(h => h.done !== false)
+          setConcluidos(arrayDeFeitos)
+          let porcentagem = ((arrayDeFeitos.length/res.data.length)*100).toFixed(0)
+          setRazao(porcentagem)
         })
         busca.catch((err) => {
             console.log(err.response.data.message)
@@ -75,7 +88,10 @@ setRazao(result)
         setMes(b + 1)
         let c = dayjs().date()
         setNumero(c)
-    }, [])
+
+
+       
+    }, [concluidos])
 
 
 
@@ -98,7 +114,7 @@ setRazao(result)
                     {habitosDeHoje.map((h) =>
                         <Habito
                             data-test="today-habit-container"
-                            onClick={() => fazerEste(h.id, h.done)}
+                            onClick={() => fazerEste(h.id, h.done, h)}
                         >
                             <div>
                                 <h1 data-test="today-habit-name">
